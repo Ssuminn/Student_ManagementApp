@@ -175,12 +175,12 @@ public class CampManagementApplication {
         System.out.println("---필수 과목 등록---");
         System.out.println("필수 과목은 최소 3개 이상 등록되어야 합니다!");
         System.out.println("필수 과목 목록:\n");
-        for (Subject subject : subjectStore) {
-            if (subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
+        for(Subject subject : subjectStore){
+            if(subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY)){
                 System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
                 System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X)");
                 int input = sc.nextInt();
-                if (input == 1) {
+                if(input == 1){
                     student.enrollMandatorySubject(subject);
 //                    System.out.println("수강생의 해당 과목 점수를 입력해주세요:");
                     // 점수 등록 메서드 호출
@@ -195,12 +195,12 @@ public class CampManagementApplication {
         System.out.println("---선택 과목 등록---");
         System.out.println("선택 과목은 최소 2개 이상 등록되어야 합니다!");
         System.out.println("선택 과목 목록:");
-        for (Subject subject : subjectStore) {
-            if (subject.getSubjectType().equals(SUBJECT_TYPE_CHOICE)) {
+        for(Subject subject : subjectStore){
+            if(subject.getSubjectType().equals(SUBJECT_TYPE_CHOICE)){
                 System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
                 System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X");
                 int input = sc.nextInt();
-                if (input == 1) {
+                if(input == 1){
                     student.enrollOptionalSubject(subject);
 //                    System.out.println("수강생의 해당 과목 점수를 입력해주세요:");
                     // 점수 등록 메서드 호출
@@ -233,9 +233,8 @@ public class CampManagementApplication {
 //                System.out.println("점수 : ");
 //                // 특정 과목 점수 조회 메서드 호출
 //            }
-        // 등록된 수강생 조회 기능(디버깅용)
-        System.out.println("----------------------------");
-    }
+            System.out.println("----------------------------");
+        }
 
 
     // 수강생 목록 조회
@@ -300,7 +299,6 @@ public class CampManagementApplication {
         // 기능 구현
         System.out.println("\n등급 조회 성공!");
     }
+
 }
-
-
 
