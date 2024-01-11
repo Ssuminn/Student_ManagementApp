@@ -182,6 +182,8 @@ public class CampManagementApplication {
                 int input = sc.nextInt();
                 if(input == 1){
                     student.enrollMandatorySubject(subject);
+//                    System.out.println("수강생의 해당 과목 점수를 입력해주세요:");
+                    // 점수 등록 메서드 호출
                     System.out.println(subject.getSubjectName() + " 등록 완료\n");
                 }
             }
@@ -200,6 +202,8 @@ public class CampManagementApplication {
                 int input = sc.nextInt();
                 if(input == 1){
                     student.enrollOptionalSubject(subject);
+//                    System.out.println("수강생의 해당 과목 점수를 입력해주세요:");
+                    // 점수 등록 메서드 호출
                     System.out.println(subject.getSubjectName() + " 등록 완료");
                 }
             }
@@ -212,18 +216,23 @@ public class CampManagementApplication {
 //        System.out.println(studentStore.get(0).toString());
 
         System.out.println("수강생 등록 성공!\n");
-        System.out.println("등록된 수강생 정보:");
-        for (Student registeredStudent : studentStore) {
-            System.out.println("학생 ID: " + registeredStudent.getStudentId());
-            System.out.println("학생 이름: " + registeredStudent.getStudentName());
-            System.out.println("등록된 필수 과목:");
-            for (Subject mandatorySubject : registeredStudent.getEnrolledMandatorySubjects()) {
-                System.out.println(" - " + mandatorySubject.getSubjectName());
-            }
-            System.out.println("등록된 선택 과목:");
-            for (Subject optionalSubject : registeredStudent.getEnrolledOptionalSubjects()) {
-                System.out.println(" - " + optionalSubject.getSubjectName());
-            }
+//        System.out.println("등록된 수강생 정보:");
+//        for (Student registeredStudent : studentStore) {
+//            System.out.println("학생 ID: " + registeredStudent.getStudentId());
+//            System.out.println("학생 이름: " + registeredStudent.getStudentName());
+//            System.out.println("등록된 필수 과목:");
+//            for (Subject mandatorySubject : registeredStudent.getEnrolledMandatorySubjects()) {
+//                System.out.println(" - " + mandatorySubject.getSubjectName());
+//                System.out.println("점수 : ");
+//                // 특정 과목 점수 조회 메서드 호출
+//
+//            }
+//            System.out.println("등록된 선택 과목:");
+//            for (Subject optionalSubject : registeredStudent.getEnrolledOptionalSubjects()) {
+//                System.out.println(" - " + optionalSubject.getSubjectName());
+//                System.out.println("점수 : ");
+//                // 특정 과목 점수 조회 메서드 호출
+//            }
             System.out.println("----------------------------");
         }
     }
