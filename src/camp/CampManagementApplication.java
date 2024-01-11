@@ -324,7 +324,6 @@ public class CampManagementApplication {
 						continue;
 					}
 				}
-	
 			}
 		}
 		return key;
@@ -336,10 +335,10 @@ public class CampManagementApplication {
 		
 		int[] target = null;
 		switch(Type) {
-			case "a" -> {//필수 과목
+			case "MANDATORY" -> {//필수 과목
 				target = a;
 			}
-			case "b" ->{//선택 과목
+			case "CHOICE" ->{//선택 과목
 				target = b;
 			}
 		}
