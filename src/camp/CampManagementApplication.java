@@ -235,7 +235,7 @@ public class CampManagementApplication {
 //            }
             System.out.println("----------------------------");
         }
-    }
+
 
     // 수강생 목록 조회
     private static void inquireStudent() {
@@ -301,3 +301,4 @@ public class CampManagementApplication {
     }
 
 }
+
