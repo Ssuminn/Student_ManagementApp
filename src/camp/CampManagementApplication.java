@@ -215,7 +215,7 @@ public class CampManagementApplication {
         studentStore.add(student);
 //        System.out.println(studentStore.get(0).toString());
 
-        System.out.println("수강생 등록 성공!\n");
+        System.out.println("수강생 등록 성공!\n\n");
 //        System.out.println("등록된 수강생 정보:");
 //        for (Student registeredStudent : studentStore) {
 //            System.out.println("학생 ID: " + registeredStudent.getStudentId());
