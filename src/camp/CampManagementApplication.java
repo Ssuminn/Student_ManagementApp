@@ -121,7 +121,7 @@ public class CampManagementApplication {
         }
     }
 
-    private static void displayMainView() throws InterruptedException {
+    private static void displayMainView() throws Exception {
         boolean flag = true;
         while (flag) {
             System.out.println("\n==================================");
@@ -218,7 +218,7 @@ public class CampManagementApplication {
         System.out.println("\n수강생 목록 조회 성공!");
     }
 
-    private static void displayScoreView() {
+    private static void displayScoreView() throws Exception {
         boolean flag = true;
         while (flag) {
             System.out.println("==================================");
@@ -262,19 +262,60 @@ public class CampManagementApplication {
     }
 
     // 수강생의 과목별 시험 회차 및 점수 등록
-    private static void createScore() {
-        String studentId = getStudentId(); // 관리할 수강생 고유 번호
-        System.out.println("시험 점수를 등록합니다...");
-        //getStudentId()를 통해  Studentr객체 반환
+    private static void createScore() throws Exception {
+        Student student = getStudentId(); // 관리할 수강생 고유 번호
+        System.out.println(student.getStudentName()+"님의 시험 점수를 등록합니다...");
+        System.out.println("1.필수 과목");
+        System.out.println("2.선택 과목");
+        System.out.println("입력 : ");
+        int key = Integer.parseInt(br.readLine());
+        List<Subject> list = null;
+        switch (key) {
+        	case 1 -> {list = student.getEnrolledMandatorySubjects();}
+        	case 2 -> {list = student.getEnrolledOptionalSubjects();}
+        }
+        int subjectCount = 1;
+        String subjectId = "";
+        String subjectType = "";
+        for(Subject subject : list) {
+        	System.out.println(subjectCount+"."+subject.getSubjectName());
+        	subjectCount++;
+        }
+        System.out.println("입력 : ");
+        key = Integer.parseInt(br.readLine());
+        key--;
+        subjectId = list.get(key).getSubjectId();
+        subjectType = list.get(key).getSubjectType();
+        
+        System.out.println("1.선택 회차 등록");
+        System.out.println("2.구간 등록");
+        key = Integer.parseInt(br.readLine());
+        switch (key) {
+        	case 1 -> {selectRoundCreate(subjectId, subjectType);}
+        	case 2 -> {continuousRoundCreate(subjectId, subjectType);}
+        }
+        
         
         
         // 기능 구현
         System.out.println("\n점수 등록 성공!");
     }
+    
+    private static void selectRoundCreate(String subjectId, String sbujectType) {//선택 회차 등록
+    	
+    	System.out.println("회차 선택 : ");
+    	
+    }
+    
+    private static void continuousRoundCreate(String subjectId, String sbujectType) {//연속 회차 등록
+    	
+    }
+    
+    
 
     // 수강생의 과목별 회차 점수 수정
-    private static void updateRoundScoreBySubject() {
-        String studentId = getStudentId(); // 관리할 수강생 고유 번호
+    private static void updateRoundScoreBySubject() throws Exception {
+    	Student student = getStudentId(); // 관리할 수강생 고유 번호
         // 기능 구현 (수정할 과목 및 회차, 점수)
         System.out.println("시험 점수를 수정합니다...");
         // 기능 구현
@@ -283,8 +324,8 @@ public class CampManagementApplication {
     }
 
     // 수강생의 특정 과목 회차별 등급 조회
-    private static void inquireRoundGradeBySubject() {
-        String studentId = getStudentId(); // 관리할 수강생 고유 번호
+    private static void inquireRoundGradeBySubject() throws Exception {
+    	Student student = getStudentId(); // 관리할 수강생 고유 번호
         // 기능 구현 (조회할 특정 과목)
         System.out.println("회차별 등급을 조회합니다...");
         // 기능 구현
