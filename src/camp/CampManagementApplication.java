@@ -1,12 +1,15 @@
 package camp;
 
-import camp.model.Score;
-import camp.model.Student;
-import camp.model.Subject;
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import camp.model.Score;
+import camp.model.Student;
+import camp.model.Subject;
 
 /**
  * Notification
@@ -36,6 +39,7 @@ public class CampManagementApplication {
 
     // 스캐너
     private static Scanner sc = new Scanner(System.in);
+    private static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     public static void main(String[] args) {
         setInitData();
@@ -239,15 +243,31 @@ public class CampManagementApplication {
         }
     }
 
-    private static String getStudentId() {
-        System.out.print("\n관리할 수강생의 번호를 입력하시오...");
-        return sc.next();
+    private static Student getStudentId() throws IOException {
+        System.out.println("\n관리할 수강생의 번호를 입력하시오...");
+        System.out.print("입력:");
+        String studentId = br.readLine();
+        Student s = null;
+        for(Student student : studentStore) {
+        	if(student.getStudentId().equals(studentId)) {
+        		s = student;
+        	}
+        }
+        if(s==null) {
+        	System.out.println("해당 학생이 존재하지 않습니다.");
+        	return getStudentId();
+        }else {
+        	return s;
+        }
     }
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() {
         String studentId = getStudentId(); // 관리할 수강생 고유 번호
         System.out.println("시험 점수를 등록합니다...");
+        //getStudentId()를 통해  Studentr객체 반환
+        
+        
         // 기능 구현
         System.out.println("\n점수 등록 성공!");
     }
@@ -258,6 +278,7 @@ public class CampManagementApplication {
         // 기능 구현 (수정할 과목 및 회차, 점수)
         System.out.println("시험 점수를 수정합니다...");
         // 기능 구현
+        
         System.out.println("\n점수 수정 성공!");
     }
 
