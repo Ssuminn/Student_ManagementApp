@@ -274,7 +274,12 @@ public class CampManagementApplication {
 	private static void scoreWriter(Student student, Subject subject) throws Exception {
 		String type = subject.getSubjectType();
 		HashMap<String, Score> scores = student.getScores();
+		if(scores.get(subject.getSubjectId())!=null) {
+			scores.put(subject.getSubjectId(), new Score(student.getStudentId(),subject.getSubjectId()));
+			
+		}
 		Score score = scores.get(subject.getSubjectId());
+
 		List<Integer> scoreList = score.getScoreList();
 		List<String> gradeList = score.getGradeList();
 		if (scoreList != null && gradeList != null && scoreList.size()!=10) {

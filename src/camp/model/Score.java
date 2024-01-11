@@ -6,9 +6,12 @@ public class Score {
     private String scoreId;
     private String studentId;
     private String subjectId;
-    private ArrayList<String> gradeList;
-    private ArrayList<Integer> scoreList;
+    private ArrayList<String> gradeList;// 등급저장
+    private ArrayList<Integer> scoreList;// 점수저장
     
+    public Score() {
+		// TODO Auto-generated constructor stub
+	}
     public Score(String seq) {
         this.scoreId = seq;
     }
