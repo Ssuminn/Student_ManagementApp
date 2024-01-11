@@ -14,6 +14,9 @@ public class Student {
     public Student(String seq, String studentName) {
         this.studentId = seq;
         this.studentName = studentName;
+        this.enrolledMandatorySubjects = new ArrayList<>();
+        this.enrolledOptionalSubjects = new ArrayList<>();
+        this.scores = new ArrayList<>();
     }
 
     // Getter
