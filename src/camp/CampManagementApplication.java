@@ -172,39 +172,60 @@ public class CampManagementApplication {
 
         Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
         // 기능 구현
-        System.out.println("필수 과목 목록:");
-//        for (Subject subject : subjectStore) {
-//            if (subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
-//                System.out.print(subject.getSubjectId() + ". " + subject.getSubjectName() + "(1: 등록, 0: 등록X) : ");
-//                int choice = sc.nextInt();
-//                if (choice == 1) {
-//                    student.enrollMandatorySubject(subject);
-//
-//                    // 시험 점수 등록
-//                    Score subjectScore = new Score(sequence(INDEX_TYPE_SCORE), student.getStudentId(), subject.getSubjectId());
-//
-//                    // 각 시험의 점수를 입력받아 등록
-//                    for (int i = 0; i < 10; i++) {
-//                        System.out.print("    " + (i + 1) + "회차 시험 점수 (입력하지 않으면 0으로 간주): ");
-//                        int examScore = sc.nextInt();
-//                        subjectScore.addExamScore(examScore);
-//                    }
-//
-//                    student.addScore(subjectScore);
-//
-//                    System.out.println(subject.getSubjectName() + " 등록 완료");
-////                student.enrollMandatorySubject(subject);
-////                student.addScore(new Score(sequence(INDEX_TYPE_SCORE)));
-////                System.out.println(subject.getSubjectName() + " 등록 완료");
-//            }
-//        }
+        System.out.println("---필수 과목 등록---");
+        System.out.println("필수 과목은 최소 3개 이상 등록되어야 합니다!");
+        System.out.println("필수 과목 목록:\n");
+        for(Subject subject : subjectStore){
+            if(subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY)){
+                System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
+                System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X)");
+                int input = sc.nextInt();
+                if(input == 1){
+                    student.enrollMandatorySubject(subject);
+                    System.out.println(subject.getSubjectName() + " 등록 완료\n");
+                }
+            }
+        }
+        if (student.getEnrolledMandatorySubjects().size() < 3) {
+            System.out.println("오류: 최소 3개의 필수 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
+            return;
+        }
+        System.out.println("---선택 과목 등록---");
+        System.out.println("선택 과목은 최소 2개 이상 등록되어야 합니다!");
+        System.out.println("선택 과목 목록:");
+        for(Subject subject : subjectStore){
+            if(subject.getSubjectType().equals(SUBJECT_TYPE_CHOICE)){
+                System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
+                System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X");
+                int input = sc.nextInt();
+                if(input == 1){
+                    student.enrollOptionalSubject(subject);
+                    System.out.println(subject.getSubjectName() + " 등록 완료");
+                }
+            }
+        }
+        if (student.getEnrolledMandatorySubjects().size() < 2) {
+            System.out.println("오류: 최소 2개의 선택 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
+            return;
+        }
+        studentStore.add(student);
+//        System.out.println(studentStore.get(0).toString());
 
-//        // 필수 과목이 최소 3개 이상 등록되었는지 확인
-//        if (student.getEnrolledMandatorySubjects().size() < 3) {
-//            System.out.println("오류: 최소 3개의 필수 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
-//            return;
-//        }
         System.out.println("수강생 등록 성공!\n");
+        System.out.println("등록된 수강생 정보:");
+        for (Student registeredStudent : studentStore) {
+            System.out.println("학생 ID: " + registeredStudent.getStudentId());
+            System.out.println("학생 이름: " + registeredStudent.getStudentName());
+            System.out.println("등록된 필수 과목:");
+            for (Subject mandatorySubject : registeredStudent.getEnrolledMandatorySubjects()) {
+                System.out.println(" - " + mandatorySubject.getSubjectName());
+            }
+            System.out.println("등록된 선택 과목:");
+            for (Subject optionalSubject : registeredStudent.getEnrolledOptionalSubjects()) {
+                System.out.println(" - " + optionalSubject.getSubjectName());
+            }
+            System.out.println("----------------------------");
+        }
     }
 
     // 수강생 목록 조회
