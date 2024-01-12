@@ -427,43 +427,6 @@ public class CampManagementApplication {
         }
     }
 
-    //수강생 번호 확인?
-
-    // 기능 구현 (수정할 과목 및 회차, 점수)
-/*
-        System.out.println("수정할 과목명을 입력하세요: ");
-        String subjectId = sc.next();
-        sc.nextLine();
-        //
-        System.out.println("수정할 회차를 입력하세요: ");
-        int round = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("새로운 점수를 입력하세요: ");
-        int newScore = sc.nextInt();
-        System.out.println("시험 점수를 수정합니다...");
-*/
-    //
-    //HashMap<String, ArrayList<Integer>> scores = new HashMap<String, ArrayList<Integer>>();
-    //scores에 키subjectId가 있는지 확인
-        /*
-
-        if (scores.containsKey(subjectId)) {
-            ArrayList<Integer> subjectScores = scores.get(subjectId); //ArrayList에 subjectScores get
-            if (round >= 0 && round < subjectScores.size()) {//0회차부터인데....
-                subjectScores.set(round, newScore); //round(회차-1)을 새로운점수로 수정
-                System.out.println("\n점수 수정 성공!");
-            }
-            else {
-                System.out.println("\n시험 회차가 존재하지 않습니다.");
-            }
-        }
-        else {
-            System.out.println("\n수강생이 과목을 수강하고 있지않습니다.");
-        }
-        */
-
-
     // 수강생의 특정 과목 회차별 등급 조회
     private static void inquireRoundGradeBySubject() throws IOException {
 
