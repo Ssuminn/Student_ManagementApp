@@ -275,6 +275,10 @@ public class CampManagementApplication {
 	private static void scoreWriter(Student student, Subject subject) throws Exception {
 		String type = subject.getSubjectType();
 		HashMap<String, Score> scores = student.getScores();
+		if(!scores.containsKey(student.getStudentId())) {
+			scores.put(subject.getSubjectId(), new Score(student.getStudentId(),subject.getSubjectId()));
+			
+		}
 		Score score = scores.get(subject.getSubjectId());
 		List<Integer> scoreList = score.getScoreList();
 		List<String> gradeList = score.getGradeList();
@@ -290,7 +294,19 @@ public class CampManagementApplication {
 			System.out.println(subject.getSubjectName()+" "+round+"회차 점수를 등록합니다.");
 			int point = checkInput(0, 2);
 			scoreList.add(point);
-			gradeList.add(point,type);
+			gradeList.add(gradeChecker(point, type));
+			System.out.println("===========scoreList============");
+			for(int s : scoreList) {
+				System.out.print(s+" ");
+			}
+			System.out.println("\n================================");
+			System.out.println("===========scoreList============");
+			for(String s : gradeList) {
+				System.out.print(s+" ");
+			}
+			System.out.println("\n================================");
+			
+			
 		}else {
 			System.out.println("등록 가능한 회차가 없습니다!");
 		}
@@ -304,7 +320,7 @@ public class CampManagementApplication {
 				System.out.print("입력 : ");
 				while(true) {
 					key = Integer.parseInt(br.readLine());
-					if(roundCount<key&&key>=10) {
+					if(roundCount<key&&key<=10) {
 						break;
 					}else {
 						System.out.println(roundCount+" ~ 10회차 까지만 입력해주세요");
@@ -318,7 +334,7 @@ public class CampManagementApplication {
 				
 				while(true) {
 					key = Integer.parseInt(br.readLine());
-					if(0<key&&key>=100) {
+					if(0<key&&key<=100) {
 						break;
 					}else {
 						System.out.println("0~100점 사이의 값을 입력해 주세요");
