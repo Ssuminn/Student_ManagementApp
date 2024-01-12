@@ -55,10 +55,6 @@ public class Score {
     public String getSubjectName() {
         return subjectName;
     }
-    }
-
-
-
     public void setSubjectName(String subjectName) {
         this.subjectId = subjectName;
     }
@@ -85,5 +81,5 @@ public class Score {
     public void setScoreList(ArrayList<Integer> scoreList) {
         this.scoreList = scoreList;
     }
-
 }
+
