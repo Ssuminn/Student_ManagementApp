@@ -243,7 +243,7 @@ public class CampManagementApplication {
 
         for (Student studentLs : studentStore){
             System.out.println("-------------------------------------");
-            //학생 고유번호와 이름 출력
+            //학생 고유번호, 이름 출력
             System.out.println("고유번호: "+studentLs.getStudentId()+"  이름: "+studentLs.getStudentName());
             // 출력되는 학생의 필수과목
             System.out.print("필수과목 : ");
