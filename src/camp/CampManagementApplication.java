@@ -113,14 +113,22 @@ public class CampManagementApplication {
             System.out.println("수강생 관리 실행 중...");
             System.out.println("1. 수강생 등록");
             System.out.println("2. 수강생 목록 조회");
-            System.out.println("3. 메인 화면 이동");
+            System.out.println("3. 상태별 수강생 목록 조회");
+            System.out.println("4. 수강생 상태 관리");
+            System.out.println("5. 수강생 정보 수정");
+            System.out.println("6. 수강생 삭제");
+            System.out.println("7. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = sc.nextInt();
 
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
                 case 2 -> inquireStudent(); // 수강생 목록 조회
-                case 3 -> flag = false; // 메인 화면 이동
+                case 3 -> inquireStateStudent(); // 상태별 수강생 목록 조회
+                case 4 -> stateStudent(); // 수강생 상태 관리
+                case 5 -> updateStudent(); // 수강생 정보 수정
+                case 6 -> deleteStudent(); // 수강생 정보 삭제
+                case 7 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
                     flag = false;
@@ -193,11 +201,58 @@ public class CampManagementApplication {
         }
     }
 
-    // 수강생 목록 조회
+    // 수강생 목록 조회 (추가기능 상태, 선택한과목 )
     private static void inquireStudent() {
         System.out.println("\n수강생 목록을 조회합니다...");
-        // 기능 구현
+        for (Student studentLs : studentStore){
+            System.out.println("-------------------------------------");
+            //학생 고유번호와 이름 출력
+            System.out.println("고유번호: "+studentLs.getStudentId()+"  이름: "+studentLs.getStudentName());
+            // 출력되는 학생의 필수과목
+            System.out.print("필수과목 : ");
+            int num = 1;
+            for (Subject mainSubjectsLs : studentLs.getEnrolledMandatorySubjects()){
+                System.out.print(num+"."+ mainSubjectsLs.getSubjectName() + "  ");
+                num++;
+            }
+            // 출력되는 학생의 선택과목
+            System.out.print("\n선택과목 : ");
+            num =1;
+            for (Subject optionSubjectsLs : studentLs.getEnrolledOptionalSubjects()){
+                System.out.print(num+"."+ optionSubjectsLs.getSubjectName()+ "  ");
+                num++;
+            }
+            System.out.println("\n");
+        }
+
         System.out.println("\n수강생 목록 조회 성공!");
+    }
+
+    // 상태별 수강생 목록 조회
+    private static void inquireStateStudent() {
+        System.out.println("\n상태별 수강생 목록을 조회합니다...");
+        // 기능 구현
+        System.out.println("\n상태별 수강생 목록을 조회 성공!");
+    }
+    // 수강생 상태 관리
+    private static void stateStudent() {
+        System.out.println("\n수강생 상태를 관리합니다...");
+        // 기능 구현
+        System.out.println("\n수강생 상태 관리 성공!");
+    }
+
+    // 수강생 정보 수정
+    private static void updateStudent() {
+        System.out.println("\n수강생 정보를 수정합니다...");
+        // 기능 구현
+        System.out.println("\n수강생 정보 수정 성공!");
+    }
+
+    // 수강생 정보 삭제
+    private static void deleteStudent() {
+        System.out.println("\n수강생을 삭제 합니다...");
+        // 기능 구현
+        System.out.println("\n수강생 삭제 성공!");
     }
 
     private static void displayScoreView() throws Exception {
@@ -209,7 +264,8 @@ public class CampManagementApplication {
             System.out.println("2. 수강생의 과목별 회차 점수 수정");
             System.out.println("3. 수강생의 특정 과목 회차별 등급 조회");
             System.out.println("4. 수강생의 과목별 평균 등급을 조회");
-            System.out.println("5. 메인 화면 이동");
+            System.out.println("5. 특정 상태 수강생들의 필수 과목 평균 등급을 조회");
+            System.out.println("6. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = sc.nextInt();
 
@@ -218,7 +274,8 @@ public class CampManagementApplication {
                 case 2 -> updateRoundScoreBySubject(); // 수강생의 과목별 회차 점수 수정
                 case 3 -> inquireRoundGradeBySubject(); // 수강생의 특정 과목 회차별 등급 조회
                 case 4 -> inquireEvgGradeBySubject(); // 수강생의 과목별 평균 등급을 조회
-                case 5 -> flag = false; // 메인 화면 이동
+                case 5 -> inquireEvgGradeByMandatorySubject(); // 특정 상태 수강생들의 필수 과목 평균 등급을 조회
+                case 6 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
                     flag = false;
@@ -441,7 +498,7 @@ public class CampManagementApplication {
         boolean all_flg = false;
         boolean inquire_flg = false;
         // 관리할 수강생 번호 입력 받기
-        Student student = getStudentId(); // 관리할 수강생 고유 번호
+        Student student = getStudentId();
         HashMap<String, Score> scores = student.getScores();
 
         // 조회할 과목 입력 받기
@@ -515,6 +572,13 @@ public class CampManagementApplication {
             System.out.println("\n등급 조회 성공!");
         }
 
+    }
+
+    // 특정 상태 수강생들의 필수 과목 평균 등급을 조회
+    private static void inquireEvgGradeByMandatorySubject() {
+        System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급을 조회 합니다...");
+        // 기능 구현
+        System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
     }
 
 }
