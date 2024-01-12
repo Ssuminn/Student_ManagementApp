@@ -320,7 +320,7 @@ public class CampManagementApplication {
         String type = subject.getSubjectType();
         HashMap<String, Score> scores = student.getScores();
         if(!scores.containsKey(student.getStudentId())) {
-            scores.put(subject.getSubjectId(), new Score(student.getStudentId(),subject.getSubjectId()));
+            scores.put(subject.getSubjectId(), new Score(student.getStudentId(),subject.getSubjectId(),subject.getSubjectName()));
 
         }
         Score score = scores.get(subject.getSubjectId());
