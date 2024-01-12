@@ -45,7 +45,6 @@ public class CampManagementApplication {
 			displayMainView();
 		} catch (Exception e) {
 			System.out.println("\n오류 발생!\n프로그램을 종료합니다.");
-			e.printStackTrace();
 		}
 	}
 
@@ -107,7 +106,7 @@ public class CampManagementApplication {
 		System.out.println("프로그램을 종료합니다.");
 	}
 
-	private static void displayStudentView() {
+	private static void displayStudentView() throws Exception {
 		boolean flag = true;
 		while (flag) {
 			System.out.println("==================================");
@@ -131,7 +130,7 @@ public class CampManagementApplication {
 	}
 
 	// 수강생 등록
-	private static void createStudent() {
+	private static void createStudent() throws Exception {
 		System.out.println("\n수강생을 등록합니다...");
 		System.out.print("수강생 이름 입력: ");
 		String studentName = sc.next();
@@ -148,6 +147,16 @@ public class CampManagementApplication {
 				int input = sc.nextInt();
 				if (input == 1) {
 					student.enrollMandatorySubject(subject);
+					System.out.println("해당 과목의 시험 점수를 등록하시겠습니까? (1: 등록, 0 : 등록 X)");
+					int input2 = sc.nextInt();
+					if(input2 == 1){
+						System.out.print("몇 회차까지 점수를 등록하시겠습니까? : ");
+						int input3 = sc.nextInt();
+						for(int i = 1; i <= input3; i++){
+							scoreWriter(student, subject, i);
+						}
+					}
+
 					System.out.println(subject.getSubjectName() + " 등록 완료\n");
 				}
 			}
@@ -162,10 +171,19 @@ public class CampManagementApplication {
 		for (Subject subject : subjectStore) {
 			if (subject.getSubjectType().equals(SUBJECT_TYPE_CHOICE)) {
 				System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
-				System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X");
+				System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X)");
 				int input = sc.nextInt();
 				if (input == 1) {
 					student.enrollOptionalSubject(subject);
+					System.out.println("해당 과목의 시험 점수를 등록하시겠습니까? (1: 등록, 0 : 등록 X)");
+					int input2 = sc.nextInt();
+					if(input2 == 1){
+						System.out.print("몇 회차까지 점수를 등록하시겠습니까? : ");
+						int input3 = sc.nextInt();
+						for(int i = 1; i <= input3; i++){
+							scoreWriter(student, subject, i);
+						}
+					}
 					System.out.println(subject.getSubjectName() + " 등록 완료");
 				}
 			}
@@ -309,6 +327,32 @@ public class CampManagementApplication {
 			
 		}else {
 			System.out.println("등록 가능한 회차가 없습니다!");
+		}
+	}
+	private static void scoreWriter(Student student, Subject subject, int round) throws Exception{
+		String type = subject.getSubjectType();
+		HashMap<String, Score> scores = student.getScores();
+		if (!scores.containsKey(student.getStudentId())) {
+			scores.put(subject.getSubjectId(), new Score(student.getStudentId(), subject.getSubjectId()));
+		}
+		Score score = scores.get(subject.getSubjectId());
+		List<Integer> scoreList = score.getScoreList();
+		List<String> gradeList = score.getGradeList();
+		if (scoreList != null && gradeList != null && scoreList.size()!=10) {
+			System.out.println(subject.getSubjectName()+" "+round+"회차 점수를 등록합니다.");
+			int point = checkInput(0, 2);
+			scoreList.add(point);
+			gradeList.add(gradeChecker(point, type));
+			System.out.println("===========scoreList============");
+			for(int s : scoreList) {
+				System.out.print(s+" ");
+			}
+			System.out.println("\n================================");
+			System.out.println("===========scoreList============");
+			for(String s : gradeList) {
+				System.out.print(s+" ");
+			}
+			System.out.println("\n================================");
 		}
 	}
 
