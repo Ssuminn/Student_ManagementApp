@@ -241,7 +241,29 @@ public class CampManagementApplication {
     // 수강생 목록 조회
     private static void inquireStudent() {
         System.out.println("\n수강생 목록을 조회합니다...");
-        // 기능 구현
+
+        for (Student studentLs : studentStore){
+            System.out.println("-------------------------------------");
+            //학생 고유번호, 이름 출력
+            System.out.println("고유번호: "+studentLs.getStudentId()+"  이름: "+studentLs.getStudentName());
+            // 출력되는 학생의 필수과목
+            System.out.print("필수과목 : ");
+                int num = 1;
+            for (Subject mainSubjectsLs : studentLs.getEnrolledMandatorySubjects()){
+                System.out.print(num+"."+ mainSubjectsLs.getSubjectName() + "  ");
+                num++;
+            }
+            // 출력되는 학생의 선택과목
+            System.out.print("\n선택과목 : ");
+                num =1;
+            for (Subject optionSubjectsLs : studentLs.getEnrolledOptionalSubjects()){
+                System.out.print(num+"."+ optionSubjectsLs.getSubjectName()+ "  ");
+                num++;
+            }
+            System.out.println("\n");
+        }
+
+
         System.out.println("\n수강생 목록 조회 성공!");
     }
 
