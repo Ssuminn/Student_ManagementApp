@@ -55,6 +55,7 @@ public class Score {
     public String getSubjectName() {
         return subjectName;
     }
+    }
 
 
 

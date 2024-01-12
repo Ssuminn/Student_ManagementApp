@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -13,9 +12,12 @@ import camp.model.Student;
 import camp.model.Subject;
 
 /**
- * Notification Java, 객체지향이 아직 익숙하지 않은 분들은 위한 소스코드 틀입니다. main 메서드를 실행하면 프로그램이
- * 실행됩니다. model 의 클래스들과 아래 (// 기능 구현...) 주석 부분을 완성해주세요! 프로젝트 구조를 변경하거나 기능을 추가해도
- * 괜찮습니다! 구현에 도움을 주기위한 Base 프로젝트입니다. 자유롭게 이용해주세요!
+ * Notification
+ * Java, 객체지향이 아직 익숙하지 않은 분들은 위한 소스코드 틀입니다.
+ * main 메서드를 실행하면 프로그램이 실행됩니다.
+ * model 의 클래스들과 아래 (// 기능 구현...) 주석 부분을 완성해주세요!
+ * 프로젝트 구조를 변경하거나 기능을 추가해도 괜찮습니다!
+ * 구현에 도움을 주기위한 Base 프로젝트입니다. 자유롭게 이용해주세요!
  */
 public class CampManagementApplication {
     // 데이터 저장소
@@ -51,15 +53,43 @@ public class CampManagementApplication {
     // 초기 데이터 생성
     private static void setInitData() {
         studentStore = new ArrayList<>();
-        subjectStore = List.of(new Subject(sequence(INDEX_TYPE_SUBJECT), "Java", SUBJECT_TYPE_MANDATORY),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "객체지향", SUBJECT_TYPE_MANDATORY),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "Spring", SUBJECT_TYPE_MANDATORY),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "JPA", SUBJECT_TYPE_MANDATORY),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "MySQL", SUBJECT_TYPE_MANDATORY),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "디자인 패턴", SUBJECT_TYPE_CHOICE),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "Spring Security", SUBJECT_TYPE_CHOICE),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "Redis", SUBJECT_TYPE_CHOICE),
-                new Subject(sequence(INDEX_TYPE_SUBJECT), "MongoDB", SUBJECT_TYPE_CHOICE));
+        subjectStore = List.of(
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "Java",
+                        SUBJECT_TYPE_MANDATORY),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "객체지향",
+                        SUBJECT_TYPE_MANDATORY),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "Spring",
+                        SUBJECT_TYPE_MANDATORY),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "JPA",
+                        SUBJECT_TYPE_MANDATORY),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "MySQL",
+                        SUBJECT_TYPE_MANDATORY),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "디자인 패턴",
+                        SUBJECT_TYPE_CHOICE),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "Spring Security",
+                        SUBJECT_TYPE_CHOICE),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "Redis",
+                        SUBJECT_TYPE_CHOICE),
+                new Subject(
+                        sequence(INDEX_TYPE_SUBJECT),
+                        "MongoDB",
+                        SUBJECT_TYPE_CHOICE));
         ScoreStore = new ArrayList<>();
     }
 
@@ -196,7 +226,29 @@ public class CampManagementApplication {
     // 수강생 목록 조회
     private static void inquireStudent() {
         System.out.println("\n수강생 목록을 조회합니다...");
-        // 기능 구현
+
+        for (Student studentLs : studentStore){
+            System.out.println("-------------------------------------");
+            //학생 고유번호, 이름 출력
+            System.out.println("고유번호: "+studentLs.getStudentId()+"  이름: "+studentLs.getStudentName());
+            // 출력되는 학생의 필수과목
+            System.out.print("필수과목 : ");
+                int num = 1;
+            for (Subject mainSubjectsLs : studentLs.getEnrolledMandatorySubjects()){
+                System.out.print(num+"."+ mainSubjectsLs.getSubjectName() + "  ");
+                num++;
+            }
+            // 출력되는 학생의 선택과목
+            System.out.print("\n선택과목 : ");
+                num =1;
+            for (Subject optionSubjectsLs : studentLs.getEnrolledOptionalSubjects()){
+                System.out.print(num+"."+ optionSubjectsLs.getSubjectName()+ "  ");
+                num++;
+            }
+            System.out.println("\n");
+        }
+
+
         System.out.println("\n수강생 목록 조회 성공!");
     }
 
@@ -240,7 +292,6 @@ public class CampManagementApplication {
             return getStudentId();
         } else {
             return s;
-
         }
     }
 
@@ -430,39 +481,10 @@ public class CampManagementApplication {
         //수강생 번호 확인?
 
         // 기능 구현 (수정할 과목 및 회차, 점수)
-/*
-        System.out.println("수정할 과목명을 입력하세요: ");
-        String subjectId = sc.next();
-        sc.nextLine();
-        //
-        System.out.println("수정할 회차를 입력하세요: ");
-        int round = sc.nextInt();
-        sc.nextLine();
-
-        System.out.println("새로운 점수를 입력하세요: ");
-        int newScore = sc.nextInt();
         System.out.println("시험 점수를 수정합니다...");
-*/
-        //
-        //HashMap<String, ArrayList<Integer>> scores = new HashMap<String, ArrayList<Integer>>();
-        //scores에 키subjectId가 있는지 확인
-        /*
-
-        if (scores.containsKey(subjectId)) {
-            ArrayList<Integer> subjectScores = scores.get(subjectId); //ArrayList에 subjectScores get
-            if (round >= 0 && round < subjectScores.size()) {//0회차부터인데....
-                subjectScores.set(round, newScore); //round(회차-1)을 새로운점수로 수정
-                System.out.println("\n점수 수정 성공!");
-            }
-            else {
-                System.out.println("\n시험 회차가 존재하지 않습니다.");
-            }
-        }
-        else {
-            System.out.println("\n수강생이 과목을 수강하고 있지않습니다.");
-        }
-        */
-
+        // 기능 구현
+        System.out.println("\n점수 수정 성공!");
+    }
 
     // 수강생의 특정 과목 회차별 등급 조회
     private static void inquireRoundGradeBySubject() throws IOException {
@@ -504,5 +526,4 @@ public class CampManagementApplication {
         }
 
     }
-}
 
