@@ -319,7 +319,7 @@ public class CampManagementApplication {
     private static void scoreWriter(Student student, Subject subject) throws Exception {
         String type = subject.getSubjectType();
         HashMap<String, Score> scores = student.getScores();
-        if(!scores.containsKey(student.getStudentId())) {
+        if(!scores.containsKey(subject.getSubjectId())) {
             scores.put(subject.getSubjectId(), new Score(student.getStudentId(),subject.getSubjectId(),subject.getSubjectName()));
 
         }
@@ -344,7 +344,7 @@ public class CampManagementApplication {
                 System.out.print(s+" ");
             }
             System.out.println("\n================================");
-            System.out.println("===========scoreList============");
+            System.out.println("===========gradeList============");
             for(String s : gradeList) {
                 System.out.print(s+" ");
             }
