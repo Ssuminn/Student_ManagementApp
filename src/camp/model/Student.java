@@ -52,4 +52,7 @@ public class Student {
         scores.put(key,score);
     }
 
+
+    public void setStudentName(String newStudentName) {
+    }
 }

@@ -112,15 +112,17 @@ public class CampManagementApplication {
             System.out.println("==================================");
             System.out.println("수강생 관리 실행 중...");
             System.out.println("1. 수강생 등록");
-            System.out.println("2. 수강생 목록 조회");
-            System.out.println("3. 메인 화면 이동");
+            System.out.println("2. 수강생 정보 수정");
+            System.out.println("3. 수강생 목록 조회");
+            System.out.println("4. 메인 화면 이동");
             System.out.print("관리 항목을 선택하세요...");
             int input = sc.nextInt();
 
             switch (input) {
                 case 1 -> createStudent(); // 수강생 등록
-                case 2 -> inquireStudent(); // 수강생 목록 조회
-                case 3 -> flag = false; // 메인 화면 이동
+                case 2 -> updateStudent(); // 수강생 정보 수정
+                case 3 -> inquireStudent(); // 수강생 목록 조회
+                case 4 -> flag = false; // 메인 화면 이동
                 default -> {
                     System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
                     flag = false;
@@ -196,8 +198,58 @@ public class CampManagementApplication {
     // 수강생 목록 조회
     private static void inquireStudent() {
         System.out.println("\n수강생 목록을 조회합니다...");
-        // 기능 구현
+        for (Student studentLs : studentStore){
+            System.out.println("-------------------------------------");
+            //학생 고유번호와 이름 출력
+            System.out.println("고유번호: "+studentLs.getStudentId()+"  이름: "+studentLs.getStudentName());
+            // 출력되는 학생의 필수과목
+            System.out.print("필수과목 : ");
+            int num = 1;
+            for (Subject mainSubjectsLs : studentLs.getEnrolledMandatorySubjects()){
+                System.out.print(num+"."+ mainSubjectsLs.getSubjectName() + "  ");
+                num++;
+            }
+            // 출력되는 학생의 선택과목
+            System.out.print("\n선택과목 : ");
+            num =1;
+            for (Subject optionSubjectsLs : studentLs.getEnrolledOptionalSubjects()){
+                System.out.print(num+"."+ optionSubjectsLs.getSubjectName()+ "  ");
+                num++;
+            }
+            System.out.println("\n");
+        }
+
         System.out.println("\n수강생 목록 조회 성공!");
+    }
+
+    // 수강생 정보 수정
+    private static void updateStudent() {
+        System.out.println("\n수강생 정보를 수정합니다...");
+        // 기능 구현
+        System.out.print("현재 학생의 이름을 입력하세요: ");
+        String currentStudentName = sc.next();
+
+        Student studentToUpdate = findStudentByName(currentStudentName);
+
+        if (studentToUpdate != null) {
+            System.out.print("새로운 학생 이름 입력: ");
+            String newStudentName = sc.next();
+
+            studentToUpdate.setStudentName(newStudentName);
+            System.out.println("학생 이름이 성공적으로 수정되었습니다. 새로운 이름: " + studentToUpdate.getStudentName());
+        } else {
+            System.out.println("입력한 이름과 일치하는 학생이 없습니다.");
+        }
+        System.out.println("\n수강생 정보 수정 성공!");
+    }
+    // 학생 이름으로 학생 찾기
+    private static Student findStudentByName(String studentName) {
+        for (Student student : studentStore) {
+            if (student.getStudentName().equals(studentName)) {
+                return student;
+            }
+        }
+        return null;
     }
 
     private static void displayScoreView() throws Exception {
