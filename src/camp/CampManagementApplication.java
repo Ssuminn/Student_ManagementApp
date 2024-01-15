@@ -459,7 +459,6 @@ public class CampManagementApplication {
         if (scoreList != null && gradeList != null && scoreList.size() != 10) {
             int round = checkInput(scoreList.size(), 1);
             if (round > scoreList.size() + 1) {
-
             	System.out.println("\n"+round+"회차를 선택하셨습니다.\n미등록 회차에 대한 처리를 어떻게 진행할까요?\n1.미등록 이전 회차 점수 등록\n2.미등록 이 전 회차 0점 처리");
             	System.out.print("입력:");
             	int key = Integer.parseInt(br.readLine());
@@ -577,15 +576,9 @@ public class CampManagementApplication {
 			System.out.println(keyCount++ + s.getSubjectName());
 			list.add(s);
 		}
-		for (Subject s : student.getEnrolledOptionalSubjects()) {
-			System.out.println(keyCount++ + s.getSubjectName());
-			list.add(s);
-		}
-
 		System.out.print("입력 : ");
 		int key = Integer.parseInt(br.readLine());
 		key--;
-
 		Subject subject = list.get(key);
 		updateScoreBySubject(student, subject);
 		System.out.println("\n점수 수정 성공!");

@@ -63,13 +63,4 @@ public class Student {
     }
     
 
-    public void setStudentState(String studentState){
-        this.studentState = studentState;
-    }
-
-    public String getStudentState(){
-        return studentState;
-    }
-    
-
 }
