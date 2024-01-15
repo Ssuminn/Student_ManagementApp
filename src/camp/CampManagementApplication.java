@@ -589,18 +589,23 @@ public class CampManagementApplication {
         	case 3 -> {state = "Red";}
         }
         
-        for(Student s : studentStore) {
-        	if(s.getState().equals(state)) {
-        		List<Subject> list = s.getEnrolledMandatorySubjects();
-        		HashMap<String, Score> map = s.getScores();
-        		for(Subject sb : list) {
-        			Score sc = map.get(sb.getSubjectId());
-        			
+        for(Student s : studentStore) { //모든 학생 목록 조회 
+        	System.out.print("["+s.getStudentName()+"] : ");
+        	if(s.getState().equals(state)) { // 상태 정보 일치하는 학생 
+        		List<Subject> list = s.getEnrolledMandatorySubjects();//필수과목 정보리스트
+        		HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
+        		int total, count;
+        		for(Subject sb : list) {//필수 과목 만큼 반복
+        			Score sc = map.get(sb.getSubjectId());//필수과목의 점수 가져옴
+        			for(int score : sc.getScoreList()) {//모든 회차 점수를 조회
+        				total += score;
+        				count++;
+        			}
         		}
+        		String grade = gradeChecker(total/count, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
+        		System.out.println(grade);//등급 출력
         	}
         }
-        
-        
         
         System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
     }
