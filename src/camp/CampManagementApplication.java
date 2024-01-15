@@ -344,12 +344,27 @@ public class CampManagementApplication {
         if (scoreList != null && gradeList != null && scoreList.size() != 10) {
             int round = checkInput(scoreList.size(), 1);
             if (round > scoreList.size() + 1) {
-                System.out.println(round + "회차를 선택하셨습니다\n이전회차는 전부 0점 처리 됩니다.");
-                int count = round - scoreList.size() - 1;
-                for (int i = 0; i < count; i++) {
-                    scoreList.add(0);
-                    gradeList.add("N");
-                }
+
+            	System.out.println(round+"회차를 선택하셨습니다.\n이전 회차에 대한 처리를 어떻게 진행할까요?\n1.이전회차 포함 등록\n2.0점 처리");
+            	int key = Integer.parseInt(br.readLine());
+            	switch(key) {
+            		case 1 -> {//이전회차 등록 후 등록
+            			int count = round - scoreList.size() - 1;
+                        for (int i = 0; i < count; i++) {
+                        	System.out.print(scoreList.size()+"회 점수 :");
+                        	int input = Integer.parseInt(br.readLine());
+                        	scoreList.add(input);
+                        	gradeList.add(gradeChecker(input, type));
+                        }
+            		}
+            		case 2 -> {//이전회차 0점
+                      int count = round - scoreList.size() - 1;
+                      for (int i = 0; i < count; i++) {
+                          scoreList.add(0);
+                          gradeList.add("N");
+                      }
+            		}
+            	}
             }
             System.out.println(subject.getSubjectName() + " " + round + "회차 점수를 등록합니다.");
             int point = checkInput(0, 2);
