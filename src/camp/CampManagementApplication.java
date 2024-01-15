@@ -268,10 +268,28 @@ public class CampManagementApplication {
 	}
 
 	// 수강생 정보 삭제
-	private static void deleteStudent() {
+	private static Student deleteStudent() throws IOException {
 		System.out.println("\n수강생을 삭제 합니다...");
-		// 기능 구현
-		System.out.println("\n수강생 삭제 성공!");
+		System.out.println("\n삭제할 수강생 이름을 입력 해 주세요...");
+		System.out.print("입력:");
+		Student s = null;
+		String StudentName = br.readLine();
+
+		for (int i=0;i<studentStore.size();i++) {
+			Student student = studentStore.get(i);
+			if (student.getStudentName().equals(StudentName)) {
+				studentStore.remove(i);
+				s = student;
+				System.out.println("\n수강생 삭제 성공!");
+			}
+		}
+		if (s == null) {
+			System.out.println("해당 학생이 존재하지 않습니다.");
+			return deleteStudent();
+		} else {
+			return s;
+
+		}
 	}
 
 	private static void displayScoreView() throws Exception {
