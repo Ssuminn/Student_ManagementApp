@@ -308,14 +308,14 @@ public class CampManagementApplication {
         Student student = getStudentId(); // 관리할 수강생 고유 번호
         System.out.println(student.getStudentName() + "님의 시험 점수를 등록합니다...");
         System.out.println("과목을 선택해 주세요");
-        System.out.println("[필수 과목]");
+        System.out.println("\n[필수 과목]");
         int keyCount = 1;
         List<Subject> list = new ArrayList<Subject>();
         for (Subject s : student.getEnrolledMandatorySubjects()) {
             System.out.println(keyCount++ + s.getSubjectName());
             list.add(s);
         }
-        System.out.println("[선택 과목]");
+        System.out.println("\n[선택 과목]");
         for (Subject s : student.getEnrolledOptionalSubjects()) {
             System.out.println(keyCount++ + s.getSubjectName());
             list.add(s);
@@ -575,9 +575,33 @@ public class CampManagementApplication {
     }
 
     // 특정 상태 수강생들의 필수 과목 평균 등급을 조회
-    private static void inquireEvgGradeByMandatorySubject() {
+    private static void inquireEvgGradeByMandatorySubject() throws NumberFormatException, IOException {
         System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급을 조회 합니다...");
         // 기능 구현
+        System.out.println("조회할 상태를 선택해주세요");
+        System.out.println("1.Green\n2.Yellow\n3.Red");
+        System.out.print("입력 : ");
+        int input = Integer.parseInt(br.readLine());
+        String state;
+        switch (input) {
+        	case 1 -> {state = "Green";}
+        	case 2 -> {state = "Yellow";}
+        	case 3 -> {state = "Red";}
+        }
+        
+        for(Student s : studentStore) {
+        	if(s.getState().equals(state)) {
+        		List<Subject> list = s.getEnrolledMandatorySubjects();
+        		HashMap<String, Score> map = s.getScores();
+        		for(Subject sb : list) {
+        			Score sc = map.get(sb.getSubjectId());
+        			
+        		}
+        	}
+        }
+        
+        
+        
         System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
     }
 
