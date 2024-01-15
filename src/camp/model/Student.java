@@ -51,5 +51,6 @@ public class Student {
     public void addScore(String key,Score score) { // 입력받은 수강생의 과목 점수 저장
         scores.put(key,score);
     }
+    
 
 }
