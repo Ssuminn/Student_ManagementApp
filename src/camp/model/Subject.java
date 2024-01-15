@@ -23,5 +23,6 @@ public class Subject {
     public String getSubjectType() {
         return subjectType;
     }
+    
 
 }
