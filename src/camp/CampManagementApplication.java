@@ -106,7 +106,7 @@ public class CampManagementApplication {
         System.out.println("프로그램을 종료합니다.");
     }
 
-    private static void displayStudentView() {
+    private static void displayStudentView() throws Exception {
         boolean flag = true;
         while (flag) {
             System.out.println("==================================");
@@ -137,69 +137,106 @@ public class CampManagementApplication {
         }
     }
 
-    // 수강생 등록
-    private static void createStudent() {
-        System.out.println("\n수강생을 등록합니다...");
-        System.out.print("수강생 이름 입력: ");
-        String studentName = sc.next();
+    private static void createStudent() throws Exception {
+		System.out.println("\n수강생을 등록합니다...");
+		System.out.print("수강생 이름 입력: ");
+		String studentName = sc.next();
 
-        Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
-        // 기능 구현
-        System.out.println("---필수 과목 등록---");
-        System.out.println("필수 과목은 최소 3개 이상 등록되어야 합니다!");
-        System.out.println("필수 과목 목록:\n");
-        for (Subject subject : subjectStore) {
-            if (subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
-                System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
-                System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X)");
-                int input = sc.nextInt();
-                if (input == 1) {
-                    student.enrollMandatorySubject(subject);
-                    System.out.println(subject.getSubjectName() + " 등록 완료\n");
-                }
-            }
-        }
-        if (student.getEnrolledMandatorySubjects().size() < 3) {
-            System.out.println("오류: 최소 3개의 필수 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
-            return;
-        }
-        System.out.println("---선택 과목 등록---");
-        System.out.println("선택 과목은 최소 2개 이상 등록되어야 합니다!");
-        System.out.println("선택 과목 목록:");
-        for (Subject subject : subjectStore) {
-            if (subject.getSubjectType().equals(SUBJECT_TYPE_CHOICE)) {
-                System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
-                System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X");
-                int input = sc.nextInt();
-                if (input == 1) {
-                    student.enrollOptionalSubject(subject);
-                    System.out.println(subject.getSubjectName() + " 등록 완료");
-                }
-            }
-        }
-        if (student.getEnrolledMandatorySubjects().size() < 2) {
-            System.out.println("오류: 최소 2개의 선택 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
-            return;
-        }
-        studentStore.add(student);
-        // System.out.println(studentStore.get(0).toString());
+		Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
 
-        System.out.println("수강생 등록 성공!\n");
-        System.out.println("등록된 수강생 정보:");
-        for (Student registeredStudent : studentStore) {
-            System.out.println("학생 ID: " + registeredStudent.getStudentId());
-            System.out.println("학생 이름: " + registeredStudent.getStudentName());
-            System.out.println("등록된 필수 과목:");
-            for (Subject mandatorySubject : registeredStudent.getEnrolledMandatorySubjects()) {
-                System.out.println(" - " + mandatorySubject.getSubjectName());
-            }
-            System.out.println("등록된 선택 과목:");
-            for (Subject optionalSubject : registeredStudent.getEnrolledOptionalSubjects()) {
-                System.out.println(" - " + optionalSubject.getSubjectName());
-            }
-            System.out.println("----------------------------");
-        }
-    }
+		System.out.println("수강생의 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
+		int input4 = sc.nextInt();
+		switch (input4){
+			case 1:
+				student.setStudentState("Green");
+				break;
+			case 2:
+				student.setStudentState("Yellow");
+				break;
+			case 3:
+				student.setStudentState("Red");
+				break;
+			default:
+				System.out.println("잘못된 값이 입력되었습니다. 수강생 등록 실패!");
+				return;
+		}
+		System.out.println("상태 등록 완료!");
+		// 기능 구현
+		System.out.println("---필수 과목 등록---");
+		System.out.println("필수 과목은 최소 3개 이상 등록되어야 합니다!");
+		System.out.println("필수 과목 목록:\n");
+		for (Subject subject : subjectStore) {
+			if (subject.getSubjectType().equals(SUBJECT_TYPE_MANDATORY)) {
+				System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
+				System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X)");
+				int input = sc.nextInt();
+				if (input == 1) {
+					student.enrollMandatorySubject(subject);
+					System.out.println("해당 과목의 시험 점수를 등록하시겠습니까? (1: 등록, 0 : 등록 X)");
+					int input2 = sc.nextInt();
+					if(input2 == 1){
+						System.out.print("몇 회차까지 점수를 등록하시겠습니까? : ");
+						int input3 = sc.nextInt();
+						for(int i = 1; i <= input3; i++){
+							scoreWriter(student, subject, i);
+						}
+					}
+
+					System.out.println(subject.getSubjectName() + " 등록 완료\n");
+				}
+			}
+		}
+		if (student.getEnrolledMandatorySubjects().size() < 3) {
+			System.out.println("오류: 최소 3개의 필수 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
+			return;
+		}
+		System.out.println("---선택 과목 등록---");
+		System.out.println("선택 과목은 최소 2개 이상 등록되어야 합니다!");
+		System.out.println("선택 과목 목록:");
+		for (Subject subject : subjectStore) {
+			if (subject.getSubjectType().equals(SUBJECT_TYPE_CHOICE)) {
+				System.out.println(subject.getSubjectId() + ". " + subject.getSubjectName());
+				System.out.println("등록하시겠습니까? (1 : 등록, 0 : 등록 X)");
+				int input = sc.nextInt();
+				if (input == 1) {
+					student.enrollOptionalSubject(subject);
+					System.out.println("해당 과목의 시험 점수를 등록하시겠습니까? (1: 등록, 0 : 등록 X)");
+					int input2 = sc.nextInt();
+					if(input2 == 1){
+						System.out.print("몇 회차까지 점수를 등록하시겠습니까? : ");
+						int input3 = sc.nextInt();
+						for(int i = 1; i <= input3; i++){
+							scoreWriter(student, subject, i);
+						}
+					}
+					System.out.println(subject.getSubjectName() + " 등록 완료");
+				}
+			}
+		}
+		if (student.getEnrolledMandatorySubjects().size() < 2) {
+			System.out.println("오류: 최소 2개의 선택 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
+			return;
+		}
+		studentStore.add(student);
+		// System.out.println(studentStore.get(0).toString());
+
+		System.out.println("수강생 등록 성공!\n");
+		System.out.println("등록된 수강생 정보:");
+		for (Student registeredStudent : studentStore) {
+			System.out.println("학생 ID: " + registeredStudent.getStudentId());
+			System.out.println("학생 이름: " + registeredStudent.getStudentName());
+			System.out.println("학생 상태: " + registeredStudent.getStudentState());
+			System.out.println("등록된 필수 과목:");
+			for (Subject mandatorySubject : registeredStudent.getEnrolledMandatorySubjects()) {
+				System.out.println(" - " + mandatorySubject.getSubjectName());
+			}
+			System.out.println("등록된 선택 과목:");
+			for (Subject optionalSubject : registeredStudent.getEnrolledOptionalSubjects()) {
+				System.out.println(" - " + optionalSubject.getSubjectName());
+			}
+			System.out.println("----------------------------");
+		}
+	}
 
     // 수강생 목록 조회 (추가기능 상태, 선택한과목 )
     private static void inquireStudent() {
@@ -388,6 +425,38 @@ public class CampManagementApplication {
             System.out.println("등록 가능한 회차가 없습니다!");
         }
     }
+    
+    private static void scoreWriter(Student student, Subject subject, int round) throws Exception{
+		String type = subject.getSubjectType();
+		HashMap<String, Score> scores = student.getScores();
+//		if (!scores.containsKey(student.getStudentId())) {
+//			scores.put(subject.getSubjectId(), new Score(student.getStudentId(), subject.getSubjectId()));
+//		}
+		if (!scores.containsKey(subject.getSubjectId())) {
+			scores.put(subject.getSubjectId(),
+					new Score(student.getStudentId(), subject.getSubjectId(), subject.getSubjectName()));
+
+		}
+		Score score = scores.get(subject.getSubjectId());
+		List<Integer> scoreList = score.getScoreList();
+		List<String> gradeList = score.getGradeList();
+		if (scoreList != null && gradeList != null && scoreList.size()!=10) {
+			System.out.println(subject.getSubjectName()+" "+round+"회차 점수를 등록합니다.");
+			int point = checkInput(0, 2);
+			scoreList.add(point);
+			gradeList.add(gradeChecker(point, type));
+			System.out.println("===========scoreList============");
+			for(int s : scoreList) {
+				System.out.print(s+" ");
+			}
+			System.out.println("\n================================");
+			System.out.println("===========scoreList============");
+			for(String s : gradeList) {
+				System.out.print(s+" ");
+			}
+			System.out.println("\n================================");
+		}
+	}
 
     private static int checkInput(int roundCount, int type) throws Exception {
         int key = 0;
@@ -600,7 +669,7 @@ public class CampManagementApplication {
         System.out.println("1.Green\n2.Yellow\n3.Red");
         System.out.print("입력 : ");
         int input = Integer.parseInt(br.readLine());
-        String state;
+        String state = "";
         switch (input) {
         	case 1 -> {state = "Green";}
         	case 2 -> {state = "Yellow";}
@@ -608,20 +677,24 @@ public class CampManagementApplication {
         }
         
         for(Student s : studentStore) { //모든 학생 목록 조회 
-        	System.out.print("["+s.getStudentName()+"] : ");
-        	if(s.getState().equals(state)) { // 상태 정보 일치하는 학생 
+        	System.out.println("\n["+s.getStudentName()+"]");
+        	if(s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생 
         		List<Subject> list = s.getEnrolledMandatorySubjects();//필수과목 정보리스트
         		HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
-        		int total, count;
+        		int total = 0, count = 0;
         		for(Subject sb : list) {//필수 과목 만큼 반복
         			Score sc = map.get(sb.getSubjectId());//필수과목의 점수 가져옴
+        			int subTotal = 0, subCount = 0;
         			for(int score : sc.getScoreList()) {//모든 회차 점수를 조회
-        				total += score;
-        				count++;
+        				subTotal += score;
+        				subCount++;
         			}
+        			total += subTotal;
+        			count += subCount;
+        			System.out.println(sb.getSubjectName()+ "\t"+gradeChecker(subTotal/subCount, SUBJECT_TYPE_MANDATORY));
         		}
         		String grade = gradeChecker(total/count, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
-        		System.out.println(grade);//등급 출력
+        		System.out.println("\n최종 평균 등급 : "+grade);//등급 출력
         	}
         }
         
