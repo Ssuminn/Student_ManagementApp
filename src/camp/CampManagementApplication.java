@@ -269,7 +269,35 @@ public class CampManagementApplication {
 	// 상태별 수강생 목록 조회
 	private static void inquireStateStudent() {
 		System.out.println("\n상태별 수강생 목록을 조회합니다...");
-		// 기능 구현
+		System.out.println("어떤 상태의 수강생을 조회 하시겠습니까? (1 : Green, 2 : Yellow, 3 : Red) : ");
+		int input = sc.nextInt();
+		for (Student student : studentStore) {
+			if(input == 1){
+				if(student.getStudentState().equals("Green")){
+					System.out.println("학생 ID: " + student.getStudentId());
+					System.out.println("학생 이름: " + student.getStudentName());
+					System.out.println("학생 상태: " + student.getStudentState());
+					System.out.println("-------------------------------------");
+				}
+			}else if(input == 2){
+				if(student.getStudentState().equals("Yellow")){
+					System.out.println("학생 ID: " + student.getStudentId());
+					System.out.println("학생 이름: " + student.getStudentName());
+					System.out.println("학생 상태: " + student.getStudentState());
+					System.out.println("-------------------------------------");
+				}
+			}else if(input == 3){
+				if(student.getStudentState().equals("Red")){
+					System.out.println("학생 ID: " + student.getStudentId());
+					System.out.println("학생 이름: " + student.getStudentName());
+					System.out.println("학생 상태: " + student.getStudentState());
+					System.out.println("-------------------------------------");
+				}
+			}else{
+				System.out.println("잘못된 값이 입력되었습니다!");
+				return;
+			}
+		}
 		System.out.println("\n상태별 수강생 목록을 조회 성공!");
 	}
 	// 수강생 상태 관리
