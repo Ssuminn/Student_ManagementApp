@@ -312,17 +312,18 @@ public class CampManagementApplication {
         int keyCount = 1;
         List<Subject> list = new ArrayList<Subject>();
         for (Subject s : student.getEnrolledMandatorySubjects()) {
-            System.out.println(keyCount++ + s.getSubjectName());
+            System.out.println(keyCount++ +"."+ s.getSubjectName());
             list.add(s);
         }
         System.out.println("\n[선택 과목]");
         for (Subject s : student.getEnrolledOptionalSubjects()) {
-            System.out.println(keyCount++ + s.getSubjectName());
+            System.out.println(keyCount++ +"."+ s.getSubjectName());
             list.add(s);
         }
         System.out.print("입력 : ");
         int key = Integer.parseInt(br.readLine());
         key--;
+        System.out.println("\n");
 
         Subject subject = list.get(key);
         scoreWriter(student, subject);
@@ -345,13 +346,15 @@ public class CampManagementApplication {
             int round = checkInput(scoreList.size(), 1);
             if (round > scoreList.size() + 1) {
 
-            	System.out.println(round+"회차를 선택하셨습니다.\n이전 회차에 대한 처리를 어떻게 진행할까요?\n1.이전회차 포함 등록\n2.0점 처리");
+            	System.out.println("\n"+round+"회차를 선택하셨습니다.\n미등록 회차에 대한 처리를 어떻게 진행할까요?\n1.미등록 이전 회차 점수 등록\n2.미등록 이 전 회차 0점 처리");
+            	System.out.print("입력:");
             	int key = Integer.parseInt(br.readLine());
+            	System.out.println("\n");
             	switch(key) {
             		case 1 -> {//이전회차 등록 후 등록
             			int count = round - scoreList.size() - 1;
                         for (int i = 0; i < count; i++) {
-                        	System.out.print(scoreList.size()+"회 점수 :");
+                        	System.out.print((scoreList.size()+1)+"회 점수 :");
                         	int input = Integer.parseInt(br.readLine());
                         	scoreList.add(input);
                         	gradeList.add(gradeChecker(input, type));
@@ -370,16 +373,16 @@ public class CampManagementApplication {
             int point = checkInput(0, 2);
             scoreList.add(point);
             gradeList.add(gradeChecker(point, type));
-            System.out.println("===========scoreList============");
-            for (int s : scoreList) {
-                System.out.print(s + " ");
-            }
-            System.out.println("\n================================");
-            System.out.println("===========gradeList============");
-            for (String s : gradeList) {
-                System.out.print(s + " ");
-            }
-            System.out.println("\n================================");
+//            System.out.println("===========scoreList============");
+//            for (int s : scoreList) {
+//                System.out.print(s + " ");
+//            }
+//            System.out.println("\n================================");
+//            System.out.println("===========gradeList============");
+//            for (String s : gradeList) {
+//                System.out.print(s + " ");
+//            }
+//            System.out.println("\n================================");
 
         } else {
             System.out.println("등록 가능한 회차가 없습니다!");
