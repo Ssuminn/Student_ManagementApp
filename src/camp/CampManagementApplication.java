@@ -138,6 +138,24 @@ public class CampManagementApplication {
         String studentName = sc.next();
 
         Student student = new Student(sequence(INDEX_TYPE_STUDENT), studentName); // 수강생 인스턴스 생성 예시 코드
+
+        System.out.println("수강생의 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
+        int input4 = sc.nextInt();
+        switch (input4){
+            case 1:
+                student.setStudentState("Green");
+                break;
+            case 2:
+                student.setStudentState("Yellow");
+                break;
+            case 3:
+                student.setStudentState("Red");
+                break;
+            default:
+                System.out.println("잘못된 값이 입력되었습니다. 수강생 등록 실패!");
+                return;
+        }
+        System.out.println("상태 등록 완료!");
         // 기능 구현
         System.out.println("---필수 과목 등록---");
         System.out.println("필수 과목은 최소 3개 이상 등록되어야 합니다!");
@@ -235,8 +253,26 @@ public class CampManagementApplication {
             System.out.print("새로운 학생 이름 입력: ");
             String newStudentName = sc.next();
 
+            System.out.println("수강생의 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
+            int input4 = sc.nextInt();
+            switch (input4){
+                case 1:
+                    studentToUpdate.setStudentState("Green");
+                    break;
+                case 2:
+                    studentToUpdate.setStudentState("Yellow");
+                    break;
+                case 3:
+                    studentToUpdate.setStudentState("Red");
+                    break;
+                default:
+                    System.out.println("잘못된 값이 입력되었습니다. 학생 정보 수정 실패!");
+                    return;
+            }
+
             studentToUpdate.setStudentName(newStudentName);
-            System.out.println("학생 이름이 성공적으로 수정되었습니다. 새로운 이름: " + studentToUpdate.getStudentName());
+            System.out.println("학생의 정보가 성공적으로 수정되었습니다. 새로운 이름: " + studentToUpdate.getStudentName() +
+                    ", 새로운 상태: " + studentToUpdate.getStudentState());
         } else {
             System.out.println("입력한 이름과 일치하는 학생이 없습니다.");
         }

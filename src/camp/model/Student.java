@@ -10,6 +10,7 @@ public class Student {
     private List<Subject> enrolledMandatorySubjects; // 수강생 등록시, 수강생이 신청한 필수 과목을 담음
     private List<Subject> enrolledOptionalSubjects; // 이건 선택 옵션
     private HashMap<String,Score> scores;
+    private String studentState;
 
     public Student(String seq, String studentName) {
         this.studentId = seq;
@@ -54,5 +55,13 @@ public class Student {
 
 
     public void setStudentName(String newStudentName) {
+    }
+
+    public void setStudentState(String studentState) {
+        this.studentState = studentState;
+    }
+
+    public String getStudentState() {
+        return studentState;
     }
 }
