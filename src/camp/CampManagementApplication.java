@@ -332,6 +332,7 @@ public class CampManagementApplication {
 		}
 		if (s == null) {
 			System.out.println("해당 학생이 존재하지 않습니다.");
+			System.out.println("-------------------------------------");
 			return deleteStudent();
 		} else {
 			return s;
@@ -652,6 +653,7 @@ public class CampManagementApplication {
 		}
 		if (!all_flg && !inquire_flg) {
 			System.out.println("조회할 과목이 존재하지 않습니다.");
+			System.out.println("-------------------------------------");
 		} else {
 			System.out.println("\n등급 조회 성공!");
 		}
@@ -692,6 +694,7 @@ public class CampManagementApplication {
 
 		if (!inquire_flg) {
 			System.out.println("조회할 과목이 존재하지 않습니다.");
+			System.out.println("-------------------------------------");
 		} else {
 			System.out.println("\n등급 조회 성공!");
 		}
