@@ -822,7 +822,8 @@ public class CampManagementApplication {
 				state = "Red";
 			}
 		}
-
+		int finalScore = 0;
+		int finalCount = 0;
 
 		for (Student s : studentStore) { //모든 학생 목록 조회
 			if (s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생
@@ -852,12 +853,18 @@ public class CampManagementApplication {
 				if(total==0&&count==0) {
 					grade = gradeChecker(0, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
 				}else {
-					grade = gradeChecker(total/count, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
+					grade = gradeChecker(Math.round((float)finalCount/count), SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
 				}
-				System.out.println("\n최종 평균 등급 : "+grade);//등급 출력
+				System.out.println("\n평균 등급 : "+grade);//등급 출력
+				finalCount += count;
+				finalScore += total;
 			}
 		}
-
+		if(finalScore!=0&&finalCount!=0) {
+			System.out.println("\n"+state+"상태 학생들의 필수 과목 평균 : "+gradeChecker(Math.round((float)finalCount/finalCount),SUBJECT_TYPE_MANDATORY));
+		}else {
+			System.out.println("\n"+state+"상태 학생들의 필수 과목 평균 : "+gradeChecker(0,SUBJECT_TYPE_MANDATORY));
+		}
 		if (stateCount == 0) {
 			System.out.println("해당 상태의 학생이 존재 하지 않습니다.");
 		} else {
