@@ -777,7 +777,7 @@ public class CampManagementApplication {
 	}
 
 	// 특정 상태 수강생들의 필수 과목 평균 등급을 조회
-	private static void inquireEvgGradeByMandatorySubject() throws NumberFormatException, IOException {
+	private static void inquireEvgGradeByMandatorySubject() {
 		int stateCount = 0;
 		System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급을 조회 합니다...");
 		// 기능 구현
@@ -816,6 +816,9 @@ public class CampManagementApplication {
 				HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
 				int total = 0, count = 0;
 				for(Subject sb : list) {//필수 과목 만큼 반복
+					if(map.containsKey(sb.getSubjectId())) {
+						
+					
 					Score sc = map.get(sb.getSubjectId());//필수과목의 점수 가져옴
 					int subTotal = 0, subCount = 0;
 					for(int score : sc.getScoreList()) {//모든 회차 점수를 조회
@@ -825,8 +828,16 @@ public class CampManagementApplication {
 					total += subTotal;
 					count += subCount;
 					System.out.println(sb.getSubjectName()+ "\t"+gradeChecker(subTotal/subCount, SUBJECT_TYPE_MANDATORY));
+					}else {
+						System.out.println(sb.getSubjectName()+"의 점수가 없습니다.");
+					}
 				}
-				String grade = gradeChecker(total/count, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
+				String grade;
+				if(total==0&&count==0) {
+					grade = gradeChecker(0, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
+				}else {
+					grade = gradeChecker(total/count, SUBJECT_TYPE_MANDATORY);// 등급 산정 메소드 호출
+				}
 				System.out.println("\n최종 평균 등급 : "+grade);//등급 출력
 			}
 		}
