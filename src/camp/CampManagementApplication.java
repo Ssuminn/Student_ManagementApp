@@ -392,7 +392,8 @@ public class CampManagementApplication {
 				System.out.println("잘못된 입력입니다. 수정 실패!");
 				return;
 		}
-		System.out.println("학생의 정보가 성공적으로 수정되었습니다." + studentToUpdate.getStudentName() + studentToUpdate.getStudentState());
+		System.out.println("학생의 정보가 성공적으로 수정되었습니다. 현재 이름: " + studentToUpdate.getStudentName() +
+				", 현재 상태: " + studentToUpdate.getStudentState());
 		System.out.println("\n수강생 정보 수정 성공!");
 	}
 
