@@ -54,7 +54,7 @@ public class Student {
     }
 
 
-    public void setStudentName(String newStudentName) {
+    public void setStudentName(String StudentName) {
     }
 
     public void setStudentState(String studentState) {

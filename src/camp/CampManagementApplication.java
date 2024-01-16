@@ -243,41 +243,59 @@ public class CampManagementApplication {
     // 수강생 정보 수정
     private static void updateStudent() {
         System.out.println("\n수강생 정보를 수정합니다...");
-        // 기능 구현
-        System.out.print("현재 학생의 이름을 입력하세요: ");
-        String currentStudentName = sc.next();
+        System.out.print("수정할 수강생의 이름 입력: ");
+        String studentName = sc.next();
 
-        Student studentToUpdate = findStudentByName(currentStudentName);
-
-        if (studentToUpdate != null) {
-            System.out.print("새로운 학생 이름 입력: ");
-            String newStudentName = sc.next();
-
-            System.out.println("수강생의 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
-            int input4 = sc.nextInt();
-            switch (input4){
-                case 1:
-                    studentToUpdate.setStudentState("Green");
-                    break;
-                case 2:
-                    studentToUpdate.setStudentState("Yellow");
-                    break;
-                case 3:
-                    studentToUpdate.setStudentState("Red");
-                    break;
-                default:
-                    System.out.println("잘못된 값이 입력되었습니다. 학생 정보 수정 실패!");
-                    return;
-            }
-
-            studentToUpdate.setStudentName(newStudentName);
-            System.out.println("학생의 정보가 성공적으로 수정되었습니다. 새로운 이름: " + studentToUpdate.getStudentName() +
-                    ", 새로운 상태: " + studentToUpdate.getStudentState());
-        } else {
-            System.out.println("입력한 이름과 일치하는 학생이 없습니다.");
+        Student studentToUpdate = findStudentByName(studentName);
+        if (studentToUpdate == null) {
+            System.out.println("수강생이 존재하지 않습니다. 수정 실패!");
+            return;
         }
+
+        System.out.println("1. 학생 이름 수정");
+        System.out.println("2. 학생 상태 수정");
+        System.out.println("3. 취소");
+        System.out.print("수정할 항목을 선택하세요: ");
+        int option = sc.nextInt();
+
+        switch (option) {
+            case 1:
+                System.out.print("새로운 학생 이름 입력: ");
+                String newStudentName = sc.next();
+                studentToUpdate.setStudentName(newStudentName);
+                System.out.println("학생 이름 수정 완료!");
+                break;
+            case 2:
+                System.out.println("새로운 수강생 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
+                int newStatus = sc.nextInt();
+                switch (newStatus){
+                    case 1:
+                        studentToUpdate.setStudentState("Green");
+                        break;
+                    case 2:
+                        studentToUpdate.setStudentState("Yellow");
+                        break;
+                    case 3:
+                        studentToUpdate.setStudentState("Red");
+                        break;
+                    default:
+                        System.out.println("잘못된 값이 입력되었습니다. 수강생 상태 수정 실패!");
+                        return;
+                }
+                System.out.println("학생 상태 수정 완료!");
+                break;
+            case 3:
+                System.out.println("수정 취소");
+                return;
+            default:
+                System.out.println("잘못된 입력입니다. 수정 실패!");
+                return;
+        }
+        System.out.println("학생의 정보가 성공적으로 수정되었습니다. 새로운 이름: " + studentToUpdate.getStudentName() +
+                ", 새로운 상태: " + studentToUpdate.getStudentState());
         System.out.println("\n수강생 정보 수정 성공!");
     }
+
     // 학생 이름으로 학생 찾기
     private static Student findStudentByName(String studentName) {
         for (Student student : studentStore) {
