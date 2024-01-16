@@ -362,7 +362,8 @@ public class CampManagementApplication {
 			case 2:
 				System.out.println("새로운 수강생 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
 				int newStatus = sc.nextInt();
-				switch (newStatus) {
+
+				switch (newStatus){
 					case 1:
 						studentToUpdate.setStudentState("Green");
 						break;
@@ -502,6 +503,7 @@ public class CampManagementApplication {
 			System.out.println("=====================등급====================");
 			for (String s : gradeList) {
 				System.out.print(s + "\t");
+
 			}
 			System.out.println("\n===========================================");
 		}
@@ -528,7 +530,9 @@ public class CampManagementApplication {
 					case 1 -> {//이전회차 등록 후 등록
 						int count = round - scoreList.size() - 1;
 						for (int i = 0; i < count; i++) {
+
 							System.out.print((scoreList.size() + 1) + "회차 ");
+
 							int input = checkInput(0, 2);
 							scoreList.add(input);
 							gradeList.add(gradeChecker(input, type));
@@ -570,9 +574,11 @@ public class CampManagementApplication {
 				System.out.println("회차를 입력해 주세요!");
 				while (true) {
 					System.out.print("입력 : ");
+
 					try {
 						key = Integer.parseInt(br.readLine());
 					} catch (NumberFormatException e) {
+
 						System.out.println("숫자만 입력해 주세요.");
 						continue;
 					}
@@ -589,6 +595,7 @@ public class CampManagementApplication {
 				System.out.println("점수를 입력해 주세요!");
 				while (true) {
 					System.out.print("입력 : ");
+
 					try {
 						key = Integer.parseInt(br.readLine());
 					} catch (NumberFormatException e) {
@@ -671,6 +678,7 @@ public class CampManagementApplication {
 				gradeList.set(round - 1, gradeChecker(point, subject.getSubjectType()));
 
 				System.out.println("=====================점수====================");
+
 				for (int s : scoreList) {
 					System.out.print(s + "\t");
 				}
@@ -678,6 +686,7 @@ public class CampManagementApplication {
 				System.out.println("=====================등급====================");
 				for (String s : gradeList) {
 					System.out.print(s + "\t");
+
 				}
 				System.out.println("\n===========================================");
 			} else {
@@ -778,6 +787,7 @@ public class CampManagementApplication {
 		System.out.println("조회할 상태를 선택해주세요");
 		System.out.println("1.Green\n2.Yellow\n3.Red");
 		System.out.print("입력 : ");
+
 		int input = 0;
 		boolean roop = true;
 		while (roop) {
@@ -790,6 +800,7 @@ public class CampManagementApplication {
 					System.out.print("입력 : ");
 				}
 			} catch (Exception e) {
+
 				System.out.println("숫자만 입력해 주세요.");
 				System.out.print("입력 : ");
 			}
@@ -808,10 +819,12 @@ public class CampManagementApplication {
 			}
 		}
 
+
 		for (Student s : studentStore) { //모든 학생 목록 조회
 			if (s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생
 				stateCount++;
 				System.out.println("\n[" + s.getStudentName() + "]");
+
 				List<Subject> list = s.getEnrolledMandatorySubjects();//필수과목 정보리스트
 				HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
 				int total = 0, count = 0;
@@ -830,6 +843,7 @@ public class CampManagementApplication {
 				System.out.println("\n최종 평균 등급 : " + grade);//등급 출력
 			}
 		}
+
 		if (stateCount == 0) {
 			System.out.println("해당 상태의 학생이 존재 하지 않습니다.");
 		} else {
@@ -837,3 +851,4 @@ public class CampManagementApplication {
 		}
 	}
 }
+
