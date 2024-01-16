@@ -830,5 +830,3 @@ public class CampManagementApplication {
 			System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
 		}
 	}
-
-}
