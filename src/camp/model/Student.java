@@ -55,6 +55,7 @@ public class Student {
 
 
     public void setStudentName(String StudentName) {
+        studentName = StudentName;
     }
 
     public void setStudentState(String studentState) {
