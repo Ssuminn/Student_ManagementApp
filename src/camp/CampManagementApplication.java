@@ -500,17 +500,17 @@ public class CampManagementApplication {
 			int point = checkInput(0, 2);
 			scoreList.add(point);
 			gradeList.add(gradeChecker(point, type));
-			System.out.println("===========scoreList============");
+			System.out.println("=====================점수====================");
 			for(int s : scoreList) {
-				System.out.print(s+" ");
+				System.out.print(s+"\t");
 			}
-			System.out.println("\n================================");
-			System.out.println("===========scoreList============");
+			System.out.println("\n===========================================");
+			System.out.println("=====================등급====================");
 			for(String s : gradeList) {
-				System.out.print(s+" ");
+				System.out.print(s+"\t");
 			}
-			System.out.println("\n================================");
-		}
+			System.out.println("\n===========================================");
+			}
 	}
 
 	private static void scoreWriter(Student student, Subject subject) throws Exception {
@@ -574,23 +574,33 @@ public class CampManagementApplication {
 		switch (type) {// 회차
 			case 1 -> {
 				System.out.println("회차를 입력해 주세요!");
-				System.out.print("입력 : ");
 				while (true) {
-					key = Integer.parseInt(br.readLine());
+					System.out.print("입력 : ");
+					try{
+						key = Integer.parseInt(br.readLine());
+					}catch(NumberFormatException e){
+						System.out.println("숫자만 입력해 주세요.");
+						continue;
+					}
 					if (roundCount < key && key <= 10) {
 						break;
 					} else {
 						System.out.println((roundCount+1) + " ~ 10회차 까지만 입력해주세요");
 						continue;
 					}
+					
 				}
 			}
 			case 2 -> {// 점수
 				System.out.println("점수를 입력해 주세요!");
-				System.out.print("입력 : ");
-
 				while (true) {
-					key = Integer.parseInt(br.readLine());
+					System.out.print("입력 : ");
+					try{
+						key = Integer.parseInt(br.readLine());
+					}catch(NumberFormatException e){
+						System.out.println("숫자만 입력해 주세요.");
+						continue;
+					}
 					if (0 < key && key <= 100) {
 						break;
 					} else {
@@ -666,16 +676,16 @@ public class CampManagementApplication {
 				scoreList.set(round - 1, point);
 				gradeList.set(round - 1, gradeChecker(point, subject.getSubjectType()));
 
-				System.out.println("===========scoreList============");
-				for (int s : scoreList) {
-					System.out.print(s + " ");
+				System.out.println("=====================점수====================");
+				for(int s : scoreList) {
+					System.out.print(s+"\t");
 				}
-				System.out.println("\n================================");
-				System.out.println("===========gradeList============");
-				for (String s : gradeList) {
-					System.out.print(s + " ");
+				System.out.println("\n===========================================");
+				System.out.println("=====================등급====================");
+				for(String s : gradeList) {
+					System.out.print(s+"\t");
 				}
-				System.out.println("\n================================");
+				System.out.println("\n===========================================");
 			} else {
 				System.out.println("등록된 회차가 없습니다!");
 			}
@@ -775,10 +785,20 @@ public class CampManagementApplication {
 		System.out.println("1.Green\n2.Yellow\n3.Red");
 		System.out.print("입력 : ");
 		int input=0;
-		try {
-			input = Integer.parseInt(br.readLine());
-		}catch(Exception e) {
-			System.out.println("숫자만 입력해 주세요");
+		boolean roop = true;
+		while(roop) {
+			try {
+				input = Integer.parseInt(br.readLine());
+				if(1<=input&&input<=3) {
+					roop = false;
+				}else {
+					System.out.println("입력이 잘못되었습니다.");
+					System.out.print("입력 : ");
+				}
+			}catch(Exception e) {
+				System.out.println("숫자만 입력해 주세요.");
+				System.out.print("입력 : ");
+			}
 		}
 
 		String state = "";
