@@ -513,7 +513,7 @@ public class CampManagementApplication {
 					if (roundCount < key && key <= 10) {
 						break;
 					} else {
-						System.out.println(roundCount + " ~ 10회차 까지만 입력해주세요");
+						System.out.println((roundCount+1) + " ~ 10회차 까지만 입력해주세요");
 						continue;
 					}
 				}
@@ -705,7 +705,13 @@ public class CampManagementApplication {
 	        System.out.println("조회할 상태를 선택해주세요");
 	        System.out.println("1.Green\n2.Yellow\n3.Red");
 	        System.out.print("입력 : ");
-	        int input = Integer.parseInt(br.readLine());
+	        int input=0;
+	        try {
+	        	input = Integer.parseInt(br.readLine());
+	        }catch(Exception e) {
+	        	System.out.println("숫자만 입력해 주세요");
+	        }
+	        
 	        String state = "";
 	        switch (input) {
 	        	case 1 -> {state = "Green";}
