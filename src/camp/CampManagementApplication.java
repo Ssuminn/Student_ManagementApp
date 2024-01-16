@@ -214,7 +214,7 @@ public class CampManagementApplication {
 				}
 			}
 		}
-		if (student.getEnrolledMandatorySubjects().size() < 2) {
+		if (student.getEnrolledOptionalSubjects().size() < 2) {
 			System.out.println("오류: 최소 2개의 선택 과목이 등록되어야 합니다. 수강생 등록 실패!\n");
 			return;
 		}
