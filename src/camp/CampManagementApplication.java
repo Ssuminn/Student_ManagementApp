@@ -331,7 +331,7 @@ public class CampManagementApplication {
 			}
 		}
 		if (s == null) {
-			System.out.println("해당 학생이 존재하지 않습니다.");
+			System.out.println("  해당 학생이 존재하지 않습니다.");
 			System.out.println("-------------------------------------");
 			return deleteStudent();
 		} else {
