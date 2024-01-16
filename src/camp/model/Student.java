@@ -7,14 +7,15 @@ import java.util.List;
 public class Student {
     private String studentId;
     private String studentName;
+    private String studentState;
     private List<Subject> enrolledMandatorySubjects; // 수강생 등록시, 수강생이 신청한 필수 과목을 담음
     private List<Subject> enrolledOptionalSubjects; // 이건 선택 옵션
     private HashMap<String,Score> scores;
-    private String studentState;
 
     public Student(String seq, String studentName) {
         this.studentId = seq;
         this.studentName = studentName;
+        this.studentState = "";
         this.enrolledMandatorySubjects = new ArrayList<>();
         this.enrolledOptionalSubjects = new ArrayList<>();
         this.scores = new HashMap<>();
@@ -53,16 +54,13 @@ public class Student {
         scores.put(key,score);
     }
 
-
-    public void setStudentName(String StudentName) {
-        studentName = StudentName;
-    }
-
-    public void setStudentState(String studentState) {
+    public void setStudentState(String studentState){
         this.studentState = studentState;
     }
 
-    public String getStudentState() {
+    public String getStudentState(){
         return studentState;
     }
+
+
 }
