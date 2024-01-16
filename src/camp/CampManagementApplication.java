@@ -181,9 +181,14 @@ public class CampManagementApplication {
 						for(int i = 1; i <= input3; i++){
 							scoreWriter(student, subject, i);
 						}
+					}else if(input2 != 1 && input2 != 0){
+						System.out.println("잘못된 값이 입력되었습니다. 점수 등록을 패스합니다.");
+						continue;
 					}
 
 					System.out.println(subject.getSubjectName() + " 등록 완료\n");
+				}else if(input != 1 && input != 0){
+					System.out.println("잘못된 값이 입력되었습니다. 과목 등록을 패스합니다.");
 				}
 			}
 		}
@@ -209,8 +214,13 @@ public class CampManagementApplication {
 						for(int i = 1; i <= input3; i++){
 							scoreWriter(student, subject, i);
 						}
+					}else if(input2 != 1 && input2 != 0){
+						System.out.println("잘못된 값이 입력되었습니다. 점수 등록을 패스합니다.");
+						continue;
 					}
 					System.out.println(subject.getSubjectName() + " 등록 완료");
+				}else if(input != 1 && input != 0){
+					System.out.println("잘못된 값이 입력되었습니다. 과목 등록을 패스합니다.");
 				}
 			}
 		}
