@@ -700,10 +700,9 @@ public class CampManagementApplication {
 		if (subjectName.equals("전체")) {
 			all_flg = true;
 		}
-
 		System.out.println("회차별 등급을 조회합니다...");
 		for (Score i : scores.values()) {
-			if (i.getSubjectId().equals(subjectName) || all_flg) {
+			if (i.getSubjectName().equals(subjectName) || all_flg) {
 				// 과묵표시
 				System.out.println(String.format("⚫︎ %s", i.getSubjectName()));
 				inquire_flg = true;
