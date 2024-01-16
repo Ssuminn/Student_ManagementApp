@@ -54,13 +54,15 @@ public class Student {
         scores.put(key,score);
     }
 
-    public void setStudentState(String studentState){
+    public void setStudentName(String StudentName) {
+        studentName = StudentName;
+    }
+
+    public void setStudentState(String studentState) {
         this.studentState = studentState;
     }
 
-    public String getStudentState(){
+    public String getStudentState() {
         return studentState;
     }
-    
-
 }

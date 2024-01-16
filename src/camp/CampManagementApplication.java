@@ -368,6 +368,24 @@ public class CampManagementApplication {
 		}
 	}
 
+    private static Student getStudentId() throws IOException {
+        System.out.println("\n관리할 수강생의 번호를 입력하시오...");
+        System.out.print("입력:");
+        String studentId = br.readLine();
+        Student s = null;
+        for (Student student : studentStore) {
+            if (student.getStudentId().equals(studentId)) {
+                s = student;
+            }
+        }
+        if (s == null) {
+            System.out.println("해당 학생이 존재하지 않습니다.");
+            return getStudentId();
+        } else {
+            return s;
+
+        }
+    }
 
     // 수강생의 과목별 시험 회차 및 점수 등록
     private static void createScore() throws Exception {
@@ -396,7 +414,7 @@ public class CampManagementApplication {
         // 기능 구현
         System.out.println("\n점수 등록 성공!");
     }
-   
+
 
 	private static Student getStudentId() throws IOException {
 		System.out.println("\n관리할 수강생의 번호를 입력하시오...");
@@ -417,7 +435,7 @@ public class CampManagementApplication {
 		}
 	}
 
-    
+
     private static void scoreWriter(Student student, Subject subject, int round) throws Exception{
 		String type = subject.getSubjectType();
 		HashMap<String, Score> scores = student.getScores();
@@ -715,10 +733,10 @@ public class CampManagementApplication {
 	        	case 2 -> {state = "Yellow";}
 	        	case 3 -> {state = "Red";}
 	        }
-	        
-	        for(Student s : studentStore) { //모든 학생 목록 조회 
+
+	        for(Student s : studentStore) { //모든 학생 목록 조회
 	        	System.out.println("\n["+s.getStudentName()+"]");
-	        	if(s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생 
+	        	if(s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생
 	        		List<Subject> list = s.getEnrolledMandatorySubjects();//필수과목 정보리스트
 	        		HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
 	        		int total = 0, count = 0;
@@ -737,8 +755,7 @@ public class CampManagementApplication {
 	        		System.out.println("\n최종 평균 등급 : "+grade);//등급 출력
 	        	}
 	        }
-	        
+
 	        System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
 	}
 
-}
