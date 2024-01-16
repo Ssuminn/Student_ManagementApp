@@ -316,12 +316,6 @@ public class CampManagementApplication {
 		System.out.println("\n수강생 상태 관리 성공!");
 	}
 
-	// 수강생 정보 수정
-	private static void updateStudent() {
-		System.out.println("\n수강생 정보를 수정합니다...");
-		// 기능 구현
-		System.out.println("\n수강생 정보 수정 성공!");
-	}
 
 	// 수강생 정보 삭제
 	private static Student deleteStudent() throws IOException {
@@ -439,34 +433,6 @@ public class CampManagementApplication {
             }
         }
     }
-	private static void displayScoreView() throws Exception {
-		boolean flag = true;
-		while (flag) {
-			System.out.println("==================================");
-			System.out.println("점수 관리 실행 중...");
-			System.out.println("1. 수강생의 과목별 시험 회차 및 점수 등록");
-			System.out.println("2. 수강생의 과목별 회차 점수 수정");
-			System.out.println("3. 수강생의 특정 과목 회차별 등급 조회");
-			System.out.println("4. 수강생의 과목별 평균 등급을 조회");
-			System.out.println("5. 특정 상태 수강생들의 필수 과목 평균 등급을 조회");
-			System.out.println("6. 메인 화면 이동");
-			System.out.print("관리 항목을 선택하세요...");
-			int input = sc.nextInt();
-			switch (input) {
-				case 1 -> createScore(); // 수강생의 과목별 시험 회차 및 점수 등록
-				case 2 -> updateRoundScoreBySubject(); // 수강생의 과목별 회차 점수 수정
-				case 3 -> inquireRoundGradeBySubject(); // 수강생의 특정 과목 회차별 등급 조회
-				case 4 -> inquireEvgGradeBySubject(); // 수강생의 과목별 평균 등급을 조회
-				case 5 -> inquireEvgGradeByMandatorySubject(); // 특정 상태 수강생들의 필수 과목 평균 등급을 조회
-				case 6 -> flag = false; // 메인 화면 이동
-				default -> {
-					System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
-					flag = false;
-				}
-			}
-		}
-	}
-
 
 	// 수강생의 과목별 시험 회차 및 점수 등록
 	private static void createScore() throws Exception {
