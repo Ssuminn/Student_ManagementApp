@@ -66,18 +66,18 @@ public class CampManagementApplication {
 	// index 자동 증가
 	private static String sequence(String type) {
 		switch (type) {
-		case INDEX_TYPE_STUDENT -> {
-			studentIndex++;
-			return INDEX_TYPE_STUDENT + studentIndex;
-		}
-		case INDEX_TYPE_SUBJECT -> {
-			subjectIndex++;
-			return INDEX_TYPE_SUBJECT + subjectIndex;
-		}
-		default -> {
-			scoreIndex++;
-			return INDEX_TYPE_SCORE + scoreIndex;
-		}
+			case INDEX_TYPE_STUDENT -> {
+				studentIndex++;
+				return INDEX_TYPE_STUDENT + studentIndex;
+			}
+			case INDEX_TYPE_SUBJECT -> {
+				subjectIndex++;
+				return INDEX_TYPE_SUBJECT + subjectIndex;
+			}
+			default -> {
+				scoreIndex++;
+				return INDEX_TYPE_SCORE + scoreIndex;
+			}
 		}
 	}
 
@@ -94,48 +94,46 @@ public class CampManagementApplication {
 			int input = sc.nextInt();
 
 			switch (input) {
-			case 1 -> displayStudentView(); // 수강생 관리
-			case 2 -> displayScoreView(); // 점수 관리
-			case 3 -> flag = false; // 프로그램 종료
-			default -> {
-				System.out.println("잘못된 입력입니다.\n되돌아갑니다!");
-				Thread.sleep(2000);
-			}
+				case 1 -> displayStudentView(); // 수강생 관리
+				case 2 -> displayScoreView(); // 점수 관리
+				case 3 -> flag = false; // 프로그램 종료
+				default -> {
+					System.out.println("잘못된 입력입니다.\n되돌아갑니다!");
+					Thread.sleep(2000);
+				}
 			}
 		}
 		System.out.println("프로그램을 종료합니다.");
 	}
 
-    private static void displayStudentView() throws Exception {
-        boolean flag = true;
-        while (flag) {
-            System.out.println("==================================");
-            System.out.println("수강생 관리 실행 중...");
-            System.out.println("1. 수강생 등록");
-            System.out.println("2. 수강생 목록 조회");
-            System.out.println("3. 상태별 수강생 목록 조회");
-            System.out.println("4. 수강생 상태 관리");
-            System.out.println("5. 수강생 정보 수정");
-            System.out.println("6. 수강생 삭제");
-            System.out.println("7. 메인 화면 이동");
-            System.out.print("관리 항목을 선택하세요...");
-            int input = sc.nextInt();
+	private static void displayStudentView() throws Exception {
+		boolean flag = true;
+		while (flag) {
+			System.out.println("==================================");
+			System.out.println("수강생 관리 실행 중...");
+			System.out.println("1. 수강생 등록");
+			System.out.println("2. 수강생 목록 조회");
+			System.out.println("3. 상태별 수강생 목록 조회");
+			System.out.println("4. 수강생 상태 & 정보 수정");
+			System.out.println("5. 수강생 삭제");
+			System.out.println("6. 메인 화면 이동");
+			System.out.print("관리 항목을 선택하세요...");
+			int input = sc.nextInt();
 
-            switch (input) {
-                case 1 -> createStudent(); // 수강생 등록
-                case 2 -> inquireStudent(); // 수강생 목록 조회
-                case 3 -> inquireStateStudent(); // 상태별 수강생 목록 조회
-                case 4 -> stateStudent(); // 수강생 상태 관리
-                case 5 -> updateStudent(); // 수강생 정보 수정
-                case 6 -> deleteStudent(); // 수강생 정보 삭제
-                case 7 -> flag = false; // 메인 화면 이동
-                default -> {
-                    System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
-                    flag = false;
-                }
-            }
-        }
-    }
+			switch (input) {
+				case 1 -> createStudent(); // 수강생 등록
+				case 2 -> inquireStudent(); // 수강생 목록 조회
+				case 3 -> inquireStateStudent(); // 상태별 수강생 목록 조회
+				case 4 -> updateStudent(); // 수강생 정보 수정
+				case 5 -> deleteStudent(); // 수강생 정보 삭제
+				case 6 -> flag = false; // 메인 화면 이동
+				default -> {
+					System.out.println("잘못된 입력입니다.\n메인 화면 이동...");
+					flag = false;
+				}
+			}
+		}
+	}
 
 	// 수강생 등록
 	private static void createStudent() throws Exception {
@@ -309,13 +307,6 @@ public class CampManagementApplication {
 		}
 		System.out.println("\n상태별 수강생 목록을 조회 성공!");
 	}
-	// 수강생 상태 관리
-	private static void stateStudent() {
-		System.out.println("\n수강생 상태를 관리합니다...");
-		// 기능 구현
-		System.out.println("\n수강생 상태 관리 성공!");
-	}
-
 
 	// 수강생 정보 삭제
 	private static Student deleteStudent() throws IOException {
@@ -343,71 +334,71 @@ public class CampManagementApplication {
 		}
 	}
 
-    // 수강생 정보 수정
-    private static void updateStudent() {
-        System.out.println("\n수강생 정보를 수정합니다...");
-        System.out.print("수정할 수강생의 이름 입력: ");
-        String studentName = sc.next();
+	// 수강생 정보 수정
+	private static void updateStudent() {
+		System.out.println("\n수강생 정보를 수정합니다...");
+		System.out.print("수정할 수강생의 이름 입력: ");
+		String studentName = sc.next();
 
-        Student studentToUpdate = findStudentByName(studentName);
-        if (studentToUpdate == null) {
-            System.out.println("수강생이 존재하지 않습니다. 수정 실패!");
-            return;
-        }
+		Student studentToUpdate = findStudentByName(studentName);
+		if (studentToUpdate == null) {
+			System.out.println("수강생이 존재하지 않습니다. 수정 실패!");
+			return;
+		}
 
-        System.out.println("1. 학생 이름 수정");
-        System.out.println("2. 학생 상태 수정");
-        System.out.println("3. 취소");
-        System.out.print("수정할 항목을 선택하세요: ");
-        int option = sc.nextInt();
+		System.out.println("1. 학생 이름 수정");
+		System.out.println("2. 학생 상태 수정");
+		System.out.println("3. 취소");
+		System.out.print("수정할 항목을 선택하세요: ");
+		int option = sc.nextInt();
 
-        switch (option) {
-            case 1:
-                System.out.print("새로운 학생 이름 입력: ");
-                String newStudentName = sc.next();
-                studentToUpdate.setStudentName(newStudentName);
-                System.out.println("학생 이름 수정 완료!");
-                break;
-            case 2:
-                System.out.println("새로운 수강생 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
-                int newStatus = sc.nextInt();
-                switch (newStatus){
-                    case 1:
-                        studentToUpdate.setStudentState("Green");
-                        break;
-                    case 2:
-                        studentToUpdate.setStudentState("Yellow");
-                        break;
-                    case 3:
-                        studentToUpdate.setStudentState("Red");
-                        break;
-                    default:
-                        System.out.println("잘못된 값이 입력되었습니다. 수강생 상태 수정 실패!");
-                        return;
-                }
-                System.out.println("학생 상태 수정 완료!");
-                break;
-            case 3:
-                System.out.println("수정 취소");
-                return;
-            default:
-                System.out.println("잘못된 입력입니다. 수정 실패!");
-                return;
-        }
-        System.out.println("학생의 정보가 성공적으로 수정되었습니다. 새로운 이름: " + studentToUpdate.getStudentName() +
-                ", 새로운 상태: " + studentToUpdate.getStudentState());
-        System.out.println("\n수강생 정보 수정 성공!");
-    }
+		switch (option) {
+			case 1:
+				System.out.print("새로운 학생 이름 입력: ");
+				String newStudentName = sc.next();
+				studentToUpdate.setStudentName(newStudentName);
+				System.out.println("학생 이름 수정 완료!");
+				break;
+			case 2:
+				System.out.println("새로운 수강생 상태를 입력해주세요 (1 : Green, 2 : Yellow, 3 : Red) : ");
+				int newStatus = sc.nextInt();
+				switch (newStatus){
+					case 1:
+						studentToUpdate.setStudentState("Green");
+						break;
+					case 2:
+						studentToUpdate.setStudentState("Yellow");
+						break;
+					case 3:
+						studentToUpdate.setStudentState("Red");
+						break;
+					default:
+						System.out.println("잘못된 값이 입력되었습니다. 수강생 상태 수정 실패!");
+						return;
+				}
+				System.out.println("학생 상태 수정 완료!");
+				break;
+			case 3:
+				System.out.println("수정 취소");
+				return;
+			default:
+				System.out.println("잘못된 입력입니다. 수정 실패!");
+				return;
+		}
+		System.out.println("학생의 정보가 성공적으로 수정되었습니다. 현재 이름: " + studentToUpdate.getStudentName() +
+				", 현재 상태: " + studentToUpdate.getStudentState());
+		System.out.println("\n수강생 정보 수정 성공!");
+	}
 
-    // 학생 이름으로 학생 찾기
-    private static Student findStudentByName(String studentName) {
-        for (Student student : studentStore) {
-            if (student.getStudentName().equals(studentName)) {
-                return student;
-            }
-        }
-        return null;
-    }
+	// 학생 이름으로 학생 찾기
+	private static Student findStudentByName(String studentName) {
+		for (Student student : studentStore) {
+			if (student.getStudentName().equals(studentName)) {
+				return student;
+			}
+		}
+		return null;
+	}
 
 	private static void displayScoreView() throws Exception {
 		boolean flag = true;
@@ -503,16 +494,16 @@ public class CampManagementApplication {
 			int point = checkInput(0, 2);
 			scoreList.add(point);
 			gradeList.add(gradeChecker(point, type));
-			System.out.println("===========scoreList============");
+			System.out.println("=====================점수====================");
 			for(int s : scoreList) {
-				System.out.print(s+" ");
+				System.out.print(s+"\t");
 			}
-			System.out.println("\n================================");
-			System.out.println("===========scoreList============");
+			System.out.println("\n===========================================");
+			System.out.println("=====================등급====================");
 			for(String s : gradeList) {
-				System.out.print(s+" ");
+				System.out.print(s+"\t");
 			}
-			System.out.println("\n================================");
+			System.out.println("\n===========================================");
 		}
 	}
 
@@ -537,8 +528,8 @@ public class CampManagementApplication {
 					case 1 -> {//이전회차 등록 후 등록
 						int count = round - scoreList.size() - 1;
 						for (int i = 0; i < count; i++) {
-							System.out.print((scoreList.size()+1)+"회 점수 :");
-							int input = Integer.parseInt(br.readLine());
+							System.out.print((scoreList.size()+1)+"회차 ");
+							int input = checkInput(0, 2);
 							scoreList.add(input);
 							gradeList.add(gradeChecker(input, type));
 						}
@@ -577,23 +568,33 @@ public class CampManagementApplication {
 		switch (type) {// 회차
 			case 1 -> {
 				System.out.println("회차를 입력해 주세요!");
-				System.out.print("입력 : ");
 				while (true) {
-					key = Integer.parseInt(br.readLine());
+					System.out.print("입력 : ");
+					try{
+						key = Integer.parseInt(br.readLine());
+					}catch(NumberFormatException e){
+						System.out.println("숫자만 입력해 주세요.");
+						continue;
+					}
 					if (roundCount < key && key <= 10) {
 						break;
 					} else {
 						System.out.println((roundCount+1) + " ~ 10회차 까지만 입력해주세요");
 						continue;
 					}
+
 				}
 			}
 			case 2 -> {// 점수
 				System.out.println("점수를 입력해 주세요!");
-				System.out.print("입력 : ");
-
 				while (true) {
-					key = Integer.parseInt(br.readLine());
+					System.out.print("입력 : ");
+					try{
+						key = Integer.parseInt(br.readLine());
+					}catch(NumberFormatException e){
+						System.out.println("숫자만 입력해 주세요.");
+						continue;
+					}
 					if (0 < key && key <= 100) {
 						break;
 					} else {
@@ -669,16 +670,16 @@ public class CampManagementApplication {
 				scoreList.set(round - 1, point);
 				gradeList.set(round - 1, gradeChecker(point, subject.getSubjectType()));
 
-				System.out.println("===========scoreList============");
-				for (int s : scoreList) {
-					System.out.print(s + " ");
+				System.out.println("=====================점수====================");
+				for(int s : scoreList) {
+					System.out.print(s+"\t");
 				}
-				System.out.println("\n================================");
-				System.out.println("===========gradeList============");
-				for (String s : gradeList) {
-					System.out.print(s + " ");
+				System.out.println("\n===========================================");
+				System.out.println("=====================등급====================");
+				for(String s : gradeList) {
+					System.out.print(s+"\t");
 				}
-				System.out.println("\n================================");
+				System.out.println("\n===========================================");
 			} else {
 				System.out.println("등록된 회차가 없습니다!");
 			}
@@ -703,10 +704,9 @@ public class CampManagementApplication {
 		if (subjectName.equals("전체")) {
 			all_flg = true;
 		}
-
 		System.out.println("회차별 등급을 조회합니다...");
 		for (Score i : scores.values()) {
-			if (i.getSubjectId().equals(subjectName) || all_flg) {
+			if (i.getSubjectName().equals(subjectName) || all_flg) {
 				// 과묵표시
 				System.out.println(String.format("⚫︎ %s", i.getSubjectName()));
 				inquire_flg = true;
@@ -772,16 +772,27 @@ public class CampManagementApplication {
 
 	// 특정 상태 수강생들의 필수 과목 평균 등급을 조회
 	private static void inquireEvgGradeByMandatorySubject() throws NumberFormatException, IOException {
+		int stateCount = 0;
 		System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급을 조회 합니다...");
 		// 기능 구현
 		System.out.println("조회할 상태를 선택해주세요");
 		System.out.println("1.Green\n2.Yellow\n3.Red");
 		System.out.print("입력 : ");
 		int input=0;
-		try {
-			input = Integer.parseInt(br.readLine());
-		}catch(Exception e) {
-			System.out.println("숫자만 입력해 주세요");
+		boolean roop = true;
+		while(roop) {
+			try {
+				input = Integer.parseInt(br.readLine());
+				if(1<=input&&input<=3) {
+					roop = false;
+				}else {
+					System.out.println("입력이 잘못되었습니다.");
+					System.out.print("입력 : ");
+				}
+			}catch(Exception e) {
+				System.out.println("숫자만 입력해 주세요.");
+				System.out.print("입력 : ");
+			}
 		}
 
 		String state = "";
@@ -792,8 +803,9 @@ public class CampManagementApplication {
 		}
 
 		for(Student s : studentStore) { //모든 학생 목록 조회
-			System.out.println("\n["+s.getStudentName()+"]");
 			if(s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생
+				stateCount++;
+				System.out.println("\n["+s.getStudentName()+"]");
 				List<Subject> list = s.getEnrolledMandatorySubjects();//필수과목 정보리스트
 				HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
 				int total = 0, count = 0;
@@ -812,8 +824,11 @@ public class CampManagementApplication {
 				System.out.println("\n최종 평균 등급 : "+grade);//등급 출력
 			}
 		}
-
-		System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
+		if(stateCount == 0) {
+			System.out.println("해당 상태의 학생이 존재 하지 않습니다.");
+		}else {
+			System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
+		}
 	}
 
 }
