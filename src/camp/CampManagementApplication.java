@@ -534,8 +534,8 @@ public class CampManagementApplication {
 					case 1 -> {//이전회차 등록 후 등록
 						int count = round - scoreList.size() - 1;
 						for (int i = 0; i < count; i++) {
-							System.out.print((scoreList.size()+1)+"회 점수 :");
-							int input = Integer.parseInt(br.readLine());
+							System.out.print((scoreList.size()+1)+"회차 ");
+							int input = checkInput(0, 2);
 							scoreList.add(input);
 							gradeList.add(gradeChecker(input, type));
 						}
@@ -769,6 +769,7 @@ public class CampManagementApplication {
 
 	// 특정 상태 수강생들의 필수 과목 평균 등급을 조회
 	private static void inquireEvgGradeByMandatorySubject() throws NumberFormatException, IOException {
+		int stateCount = 0;
 		System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급을 조회 합니다...");
 		// 기능 구현
 		System.out.println("조회할 상태를 선택해주세요");
@@ -789,8 +790,9 @@ public class CampManagementApplication {
 		}
 
 		for(Student s : studentStore) { //모든 학생 목록 조회
-			System.out.println("\n["+s.getStudentName()+"]");
 			if(s.getStudentState().equals(state)) { // 상태 정보 일치하는 학생
+				stateCount++;
+				System.out.println("\n["+s.getStudentName()+"]");
 				List<Subject> list = s.getEnrolledMandatorySubjects();//필수과목 정보리스트
 				HashMap<String, Score> map = s.getScores();// 점수 담는 리스트
 				int total = 0, count = 0;
@@ -809,8 +811,11 @@ public class CampManagementApplication {
 				System.out.println("\n최종 평균 등급 : "+grade);//등급 출력
 			}
 		}
-
-		System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
+		if(stateCount == 0) {
+			System.out.println("해당 상태의 학생이 존재 하지 않습니다.");
+		}else {
+			System.out.println("\n특정 상태 수강생들의 필수 과목 평균 등급 조희 성공!");
+		}
 	}
 
 }
