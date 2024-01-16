@@ -7,16 +7,18 @@ import java.util.List;
 public class Student {
     private String studentId;
     private String studentName;
+    private String studentState;
     private List<Subject> enrolledMandatorySubjects; // 수강생 등록시, 수강생이 신청한 필수 과목을 담음
     private List<Subject> enrolledOptionalSubjects; // 이건 선택 옵션
-    private List<Score> scores;
+    private HashMap<String,Score> scores;
 
     public Student(String seq, String studentName) {
         this.studentId = seq;
         this.studentName = studentName;
+        this.studentState = "";
         this.enrolledMandatorySubjects = new ArrayList<>();
         this.enrolledOptionalSubjects = new ArrayList<>();
-        this.scores = new ArrayList<>();
+        this.scores = new HashMap<>();
     }
 
     // Getter
@@ -36,7 +38,7 @@ public class Student {
         return enrolledOptionalSubjects;
     }
 
-    public List<Score> getScores() {
+    public HashMap<String,Score> getScores() {
         return scores;
     }
 
@@ -48,8 +50,20 @@ public class Student {
         enrolledOptionalSubjects.add(subject);
     }
 
-    public void addScore(Score score) { // 입력받은 수강생의 과목 점수 저장
-        scores.add(score);
+    public void addScore(String key,Score score) { // 입력받은 수강생의 과목 점수 저장
+        scores.put(key,score);
     }
 
+    public void setStudentState(String studentState){
+        this.studentState = studentState;
+    }
+
+    public String getStudentState(){
+        return studentState;
+    }
+
+
+    public void setStudentName(String studentName) {
+        this.studentName = studentName;
+    }
 }
