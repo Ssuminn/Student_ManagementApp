@@ -82,7 +82,7 @@ public class CampManagementApplication {
 	}
 
 	private static void displayMainView() throws Exception {
-
+// 시도
 		boolean flag = true;
 		while (flag) {
 			System.out.println("\n==================================");
